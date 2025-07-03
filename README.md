@@ -29,11 +29,11 @@
 
 ```
 SmartBin System
-├── 前端 (Next.js + TypeScript)          # 端口: 3000
+├── 前端 (React: Next.js + TypeScript)          # 端口: 3000
 │   ├── 实时检测界面
 │   ├── 机械臂控制面板
 │   └── 系统状态监控
-├── 后端 (Flask + Python)               # 端口: 5001
+├── 后端 (Yolov8: Flask + Python)               # 端口: 5001
 │   ├── YOLOv8 检测服务
 │   ├── 机械臂控制服务
 │   └── RESTful API
