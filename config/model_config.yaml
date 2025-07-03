@@ -1,0 +1,77 @@
+# YOLOv8 模型配置文件
+model:
+  name: "yolov8n"  # 可选: yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
+  pretrained: true
+  input_size: 640
+  confidence_threshold: 0.25
+  iou_threshold: 0.45
+  max_detections: 300
+
+# 训练配置
+training:
+  epochs: 100
+  batch_size: 16
+  learning_rate: 0.01
+  optimizer: "AdamW"
+  weight_decay: 0.0005
+  momentum: 0.937
+  warmup_epochs: 3
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+  
+  # 数据增强
+  augmentation:
+    hsv_h: 0.015
+    hsv_s: 0.7
+    hsv_v: 0.4
+    degrees: 0.0
+    translate: 0.1
+    scale: 0.5
+    shear: 0.0
+    perspective: 0.0
+    flipud: 0.0
+    fliplr: 0.5
+    mosaic: 1.0
+    mixup: 0.0
+
+# 验证配置
+validation:
+  val_split: 0.2
+  save_period: 10
+  patience: 50
+  
+# 类别配置
+classes:
+  names:
+    - "banana"
+    - "beverages" 
+    - "cardboard_box"
+    - "chips"
+    - "fish_bones"
+    - "instant_noodles"
+    - "milk_box_type1"
+    - "milk_box_type2"
+    - "plastic"
+  
+  # 垃圾分类映射 (用于机械臂控制)
+  categories:
+    organic:      # 有机垃圾
+      - "banana"
+      - "fish_bones"
+    recyclable:   # 可回收垃圾
+      - "beverages"
+      - "cardboard_box"
+      - "milk_box_type1"
+      - "milk_box_type2"
+      - "plastic"
+    other:        # 其他垃圾
+      - "chips"
+      - "instant_noodles"
+
+# 导出配置
+export:
+  format: ["onnx", "engine"]  # 导出格式
+  half: true                   # FP16精度
+  dynamic: false              # 动态输入尺寸
+  simplify: true              # ONNX模型简化
+  opset: 11                   # ONNX opset版本 

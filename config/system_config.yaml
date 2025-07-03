@@ -1,0 +1,46 @@
+# 系统配置文件
+system:
+  name: "SmartBin垃圾分拣系统"
+  version: "1.0.0"
+  debug: true
+  log_level: "INFO"
+
+# 网络服务配置
+web_server:
+  host: "0.0.0.0"
+  port: 5000
+  debug: true
+  threaded: true
+  
+# 数据路径配置
+paths:
+  data_dir: "data"
+  dataset_dir: "dataset"
+  models_dir: "models"
+  logs_dir: "logs"
+  temp_dir: "temp"
+  upload_dir: "uploads"
+
+# 性能配置
+performance:
+  target_fps: 15
+  max_queue_size: 10
+  processing_threads: 2
+  detection_interval: 0.1  # 检测间隔(秒)
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_handler:
+    enabled: true
+    max_bytes: 10485760  # 10MB
+    backup_count: 5
+  console_handler:
+    enabled: true
+
+# 安全配置
+security:
+  max_upload_size: 16777216  # 16MB
+  allowed_extensions: [".jpg", ".jpeg", ".png", ".bmp", ".tiff"]
+  cors_origins: ["*"] 

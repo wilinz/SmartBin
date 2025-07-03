@@ -1,0 +1,366 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# But keep important project logs
+!logs/*.log
+!logs/**/*.log
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Machine Learning & Data Science (temporary files)
+*.h5.tmp
+*.hdf5.tmp
+*.pkl.tmp
+*.pickle.tmp
+*.joblib.tmp
+*.model.tmp
+*.weights.tmp
+*.ckpt.tmp
+*.pth.tmp
+*.pt.tmp
+*.onnx.tmp
+*.pb.tmp
+*.tflite.tmp
+*.mlmodel.tmp
+
+# Temporary data files
+*.csv.tmp
+*.json.tmp
+*.xml.tmp
+*.parquet.tmp
+*.feather.tmp
+*.npy.tmp
+*.npz.tmp
+
+# Model training outputs (keep trained models, ignore temp files)
+experiments/
+runs/train/
+runs/detect/
+outputs/
+checkpoints/
+saved_models/temp/
+
+# Keep important model files and datasets
+# !models/
+# !datasets/
+# !data/
+# !*.pt
+# !*.weights
+# !*.h5
+# !*.pkl
+
+# Tensorboard
+tensorboard/
+tb_logs/
+
+# Weights & Biases
+wandb/
+
+# MLflow
+mlruns/
+mlflow/
+
+# Jupyter
+*.ipynb
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+# Camera/Video files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.mkv
+*.webm
+
+# Temporary image files
+*.jpg.tmp
+*.jpeg.tmp
+*.png.tmp
+*.gif.tmp
+*.bmp.tmp
+*.tiff.tmp
+*.tif.tmp
+*.svg.tmp
+*.ico.tmp
+*.webp.tmp
+
+# Keep dataset images
+# !data/**/*.jpg
+# !data/**/*.jpeg
+# !data/**/*.png
+# !datasets/**/*.jpg
+# !datasets/**/*.jpeg
+# !datasets/**/*.png
+
+# Audio files
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+*.7z
+
+# YOLO specific (temporary files)
+yolo/temp/
+weights/temp/
+*.pt.tmp
+*.weights.tmp
+*.cfg.tmp
+runs/temp/
+datasets/temp/
+labels/temp/
+images/temp/
+
+# Keep YOLO models and data
+# !yolo/
+# !weights/
+# !*.pt
+# !*.weights
+# !*.cfg
+# !runs/
+# !datasets/
+# !labels/
+# !images/
+
+# Hardware/System logs (keep existing log files)
+*.log.tmp
+logs/temp/
+logs/cache/
+uploads/temp/
+uploads/cache/
+temp/
+cache/
+
+# Keep existing logs and uploads
+# !logs/
+# !uploads/
+
+# Config files with sensitive data
+config/secrets.yaml
+config/local.yaml
+.secrets
+*.key
+*.pem
+*.cert
+*.crt
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Custom project ignores (temporary files only)
+uploads/temp/
+temp_images/
+cache/
+
+# Keep project directories and important files
+# !uploads/
+# !models/
+# !datasets/
+# !data/
+# !logs/
+
+# ================================================
+# SmartBin Project Specific Rules
+# ================================================
+
+# Ignore models directory completely
+models/
+
+# Keep dataset directory structure but ignore actual data files
+!data/
+!datasets/
+# Ignore dataset files but keep directory structure
+data/**/*.jpg
+data/**/*.jpeg
+data/**/*.png
+data/**/*.xml
+data/**/*.txt
+datasets/**/*.jpg
+datasets/**/*.jpeg
+datasets/**/*.png
+datasets/**/*.xml
+datasets/**/*.txt
+datasets/**/*.yaml
+datasets/**/*.yml
+datasets/**/*.cache
+datasets/**/*.pt
+datasets/**/*.pth
+
+# Keep .gitkeep files to maintain directory structure
+!**/.gitkeep
+
+# Keep logs and uploads
+!logs/
+!uploads/
+
+# Keep configuration files
+!config/
+!*.yaml
+!*.yml
+!*.json
+
+# Keep scripts and documentation
+!scripts/
+!docs/
+!*.md
+!*.rst
+
+# But ignore temporary and cache files
+**/*.tmp
+**/*.cache
+**/*.bak
+**/*.backup
+**/temp/
+**/cache/
+**/__pycache__/
+**/.pytest_cache/ 
+
+yolov8n.pt

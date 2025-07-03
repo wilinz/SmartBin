@@ -1,0 +1,15 @@
+names:
+- banana
+- beverages
+- cardboard_box
+- chips
+- fish_bones
+- instant_noodles
+- milk_box_type1
+- milk_box_type2
+- plastic
+nc: 9
+path: /Users/wilinz/Documents/大三下/工程实训高级/smartbin/datasets/yolo_dataset
+test: test/images
+train: train/images
+val: val/images

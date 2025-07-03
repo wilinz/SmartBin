@@ -1,0 +1,95 @@
+# 硬件配置文件
+camera:
+  device_id: 0
+  width: 640
+  height: 480
+  fps: 30
+  auto_exposure: true
+  exposure: -5
+  gain: 0
+  white_balance: 4000
+  virtual_mode: true  # 启用虚拟摄像头模式
+
+# 机械臂配置
+robot_arm:
+  enabled: true
+  virtual_mode: true    # 启用虚拟机械臂模式
+  port: "/dev/ttyUSB0"  # Linux下的串口，Windows下为COM端口
+  baudrate: 115200
+  timeout: 1.0
+  
+  # 位置配置 (单位: 毫米和度)
+  positions:
+    home:        # 初始位置
+      x: 200
+      y: 0
+      z: 150
+      rotation: 0
+    
+    # 货物拾取位置
+    pickup_positions:
+      position_1:
+        x: 150
+        y: -100
+        z: 50
+        rotation: 0
+      position_2:
+        x: 200
+        y: -100
+        z: 50
+        rotation: 0
+      position_3:
+        x: 250
+        y: -100
+        z: 50
+        rotation: 0
+    
+    # 垃圾桶投放位置
+    drop_positions:
+      organic:     # 有机垃圾桶
+        x: 100
+        y: 150
+        z: 100
+        rotation: 0
+      recyclable:  # 可回收垃圾桶
+        x: 200
+        y: 150
+        z: 100
+        rotation: 0
+      other:       # 其他垃圾桶
+        x: 300
+        y: 150
+        z: 100
+        rotation: 0
+
+  # 运动参数
+  motion:
+    speed: 50          # 运动速度 (mm/s)
+    acceleration: 100  # 加速度 (mm/s²)
+    precision: 2       # 定位精度 (mm)
+    grip_force: 50     # 夹持力度 (0-100)
+
+# 传感器配置
+sensors:
+  virtual_mode: true    # 启用虚拟传感器模式
+  weight_sensor:
+    enabled: true
+    port: "/dev/ttyUSB1"
+    baudrate: 9600
+    
+  distance_sensor:
+    enabled: true
+    trigger_pin: 18
+    echo_pin: 24
+    max_distance: 400  # cm
+
+# GPIO配置 (适用于树莓派等)
+gpio:
+  led_pins:
+    power: 2
+    status: 3
+    error: 4
+  button_pins:
+    start: 17
+    stop: 18
+    reset: 27 

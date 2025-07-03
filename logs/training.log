@@ -1,0 +1,64 @@
+2025-07-02 23:32:15,968 - src.models.trainer - INFO - 使用设备: mps
+2025-07-02 23:32:30,725 - src.models.trainer - ERROR - 加载模型失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.tasks.DetectionModel was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])` or the `torch.serialization.safe_globals([ultralytics.nn.tasks.DetectionModel])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:35:15,908 - src.models.trainer - INFO - 使用设备: mps
+2025-07-02 23:35:15,910 - src.models.trainer - ERROR - 加载模型失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.modules.Conv was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.modules.Conv])` or the `torch.serialization.safe_globals([ultralytics.nn.modules.Conv])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:35:15,910 - src.models.trainer - ERROR - 安全上下文加载也失败: _safe_globals.__init__() missing 1 required positional argument: 'safe_globals'
+2025-07-02 23:36:28,677 - src.models.trainer - INFO - 使用设备: mps
+2025-07-02 23:36:28,678 - src.models.trainer - ERROR - 加载模型失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.tasks.DetectionModel was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])` or the `torch.serialization.safe_globals([ultralytics.nn.tasks.DetectionModel])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:36:28,700 - src.models.trainer - INFO - 使用兼容模式成功加载模型: yolov8n
+2025-07-02 23:36:28,701 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 2, 'batch': 16, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1751470588', 'save_period': 10, 'patience': 50, 'resume': False, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0}
+2025-07-02 23:38:56,337 - src.models.trainer - ERROR - 训练失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.tasks.DetectionModel was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])` or the `torch.serialization.safe_globals([ultralytics.nn.tasks.DetectionModel])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:40:22,404 - src.models.trainer - INFO - 使用设备: mps
+2025-07-02 23:40:22,408 - src.models.trainer - ERROR - 加载模型失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.tasks.DetectionModel was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])` or the `torch.serialization.safe_globals([ultralytics.nn.tasks.DetectionModel])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:40:22,431 - src.models.trainer - INFO - 使用兼容模式成功加载模型: yolov8n
+2025-07-02 23:40:22,431 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 10, 'batch': 16, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1751470822', 'save_period': 10, 'patience': 50, 'resume': False, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0}
+2025-07-02 23:45:03,180 - src.models.trainer - INFO - 检测到Apple Silicon GPU，启用MPS加速
+2025-07-02 23:45:03,180 - src.models.trainer - INFO - 使用设备: mps
+2025-07-02 23:45:03,182 - src.models.trainer - ERROR - 加载模型失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.tasks.DetectionModel was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])` or the `torch.serialization.safe_globals([ultralytics.nn.tasks.DetectionModel])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:45:03,196 - src.models.trainer - INFO - 使用兼容模式成功加载模型: yolov8n
+2025-07-02 23:45:03,196 - src.models.trainer - INFO - 使用MPS优化的训练参数
+2025-07-02 23:45:03,196 - src.models.trainer - INFO - 应用MPS设备特定优化设置
+2025-07-02 23:45:03,196 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 10, 'batch': 32, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1751471103', 'save_period': 10, 'patience': 20, 'resume': False, 'workers': 0, 'amp': True, 'cache': True, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0, 'verbose': True, 'plots': True, 'save': True}
+2025-07-02 23:49:45,587 - src.models.trainer - ERROR - 训练失败: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL ultralytics.nn.tasks.DetectionModel was not an allowed global by default. Please use `torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])` or the `torch.serialization.safe_globals([ultralytics.nn.tasks.DetectionModel])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+2025-07-02 23:58:00,899 - src.models.trainer - INFO - 检测到Apple Silicon GPU，启用MPS加速
+2025-07-02 23:58:00,899 - src.models.trainer - INFO - 使用设备: mps
+2025-07-02 23:58:00,926 - src.models.trainer - INFO - 成功加载模型: yolov8n
+2025-07-02 23:58:00,926 - src.models.trainer - INFO - 使用MPS优化的训练参数
+2025-07-02 23:58:00,926 - src.models.trainer - INFO - 应用MPS设备特定优化设置
+2025-07-02 23:58:00,926 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 10, 'batch': 32, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1751471880', 'save_period': 2, 'patience': 20, 'resume': False, 'workers': 0, 'amp': True, 'cache': True, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0, 'verbose': True, 'plots': True, 'save': True, 'cos_lr': True, 'close_mosaic': 0}
+2025-07-03 00:02:59,337 - src.models.trainer - INFO - 训练完成，模型保存在: models/garbage_sorting_1751471880/weights/best.pt
