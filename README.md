@@ -118,7 +118,7 @@ npm install
 python scripts/prepare_data.py
 
 # 或者下载预训练模型 (推荐)
-# 项目已包含预训练模型: models/garbage_sorting_1751471880/weights/best.pt
+# 项目已包含预训练模型: https://github.com/wilinz/SmartBin/releases/download/1.0.0/best.pt
 ```
 
 ### 4. 启动系统
