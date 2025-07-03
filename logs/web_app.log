@@ -29209,3 +29209,6 @@ Check the documentation of torch.load to learn more about types accepted by defa
 2025-07-03 13:39:51,481 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:39:51] "OPTIONS /api/status HTTP/1.1" 200 -
 2025-07-03 13:39:51,482 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:39:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
 2025-07-03 13:39:51,485 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:39:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:40:51,482 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:40:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:40:51,485 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:40:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:40:51,486 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:40:51] "GET /api/status HTTP/1.1" 200 -

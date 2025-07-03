@@ -113,6 +113,7 @@ npm install
 ### 3. 准备数据和模型
 
 #### 数据集准备
+项目已包含预训练模型: [https://github.com/wilinz/SmartBin/releases/download/1.0.0/best.pt](https://github.com/wilinz/SmartBin/releases/download/1.0.0/best.pt)
 ```bash
 # 如果有原始数据，运行数据预处理
 python scripts/prepare_data.py
