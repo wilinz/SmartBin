@@ -137,6 +137,10 @@ class ConfigLoader:
         """获取模型名称"""
         return self.get_value('model', 'model.name', 'yolov8n')
     
+    def get_default_model_path(self) -> str:
+        """获取默认模型路径"""
+        return self.get_value('model', 'model.default_model_path', 'models/best.pt')
+    
     def get_confidence_threshold(self) -> float:
         """获取置信度阈值"""
         return self.get_value('model', 'model.confidence_threshold', 0.25)

@@ -111,7 +111,7 @@ class SystemController:
             
             # 初始化检测器
             self.logger.info("初始化检测器...")
-            self.detector = GarbageDetector()
+            self.detector = GarbageDetector()  # 默认会自动加载默认模型
             
             # 初始化摄像头
             self.logger.info("初始化摄像头...")

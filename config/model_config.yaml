@@ -2,6 +2,7 @@
 model:
   name: "yolov8n"  # 可选: yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
   pretrained: true
+  default_model_path: "models/best.pt"  # 默认模型路径
   input_size: 640
   confidence_threshold: 0.25
   iou_threshold: 0.45

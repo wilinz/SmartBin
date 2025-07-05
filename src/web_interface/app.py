@@ -82,6 +82,9 @@ class WebApp:
         # 初始化虚拟机械臂
         self.setup_robot_arm()
         
+        # 自动加载默认模型
+        self.load_default_model()
+        
         # 设置路由
         self.setup_routes()
     
@@ -164,6 +167,20 @@ class WebApp:
             self.logger.error(f"❌ 机械臂初始化失败: {e}")
             self.robot_arm = None
     
+    def load_default_model(self):
+        """加载默认模型"""
+        try:
+            default_model_path = config_loader.get_default_model_path()
+            if Path(default_model_path).exists():
+                self.detector = GarbageDetector(default_model_path)
+                self.logger.info(f"✅ 默认模型已加载: {default_model_path}")
+            else:
+                self.logger.warning(f"⚠️ 默认模型文件不存在: {default_model_path}")
+                self.logger.info("💡 可以手动加载模型或先训练一个模型")
+        except Exception as e:
+            self.logger.error(f"❌ 加载默认模型失败: {e}")
+            self.detector = None
+    
     def setup_routes(self):
         """设置路由"""
         
@@ -244,8 +261,12 @@ class WebApp:
                 data = request.get_json()
                 model_path = data.get('model_path')
                 
-                if not model_path or not Path(model_path).exists():
-                    return jsonify({'error': '模型文件不存在'}), 400
+                # 如果没有指定模型路径，使用默认路径
+                if not model_path:
+                    model_path = config_loader.get_default_model_path()
+                
+                if not Path(model_path).exists():
+                    return jsonify({'error': f'模型文件不存在: {model_path}'}), 400
                 
                 self.detector = GarbageDetector(model_path)
                 

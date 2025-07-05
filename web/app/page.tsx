@@ -249,7 +249,7 @@ export default function SmartBinDashboard() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model_path: 'models/garbage_sorting_1751471880/weights/best.pt'
+          model_path: 'models/best.pt'
         })
       })
       

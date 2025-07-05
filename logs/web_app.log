@@ -29212,3 +29212,439 @@ Check the documentation of torch.load to learn more about types accepted by defa
 2025-07-03 13:40:51,482 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:40:51] "OPTIONS /api/status HTTP/1.1" 200 -
 2025-07-03 13:40:51,485 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:40:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
 2025-07-03 13:40:51,486 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:40:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:41:51,480 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:41:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:41:51,481 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:41:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:41:51,484 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:41:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:42:51,484 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:42:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:42:51,489 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:42:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:42:51,490 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:42:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:43:51,485 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:43:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:43:51,486 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:43:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:43:51,489 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:43:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:44:51,489 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:44:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:44:51,493 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:44:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:44:51,495 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:44:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:45:51,495 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:45:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:45:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:45:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:45:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:45:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:46:51,490 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:46:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:46:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:46:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:46:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:46:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:47:51,492 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:47:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:47:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:47:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:47:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:47:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:48:51,492 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:48:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:48:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:48:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:48:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:48:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:49:51,492 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:49:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:49:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:49:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:49:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:49:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:50:51,492 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:50:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:50:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:50:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:50:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:50:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:51:51,493 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:51:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:51:51,494 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:51:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:51:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:51:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:52:51,490 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:52:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:52:51,494 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:52:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:52:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:52:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:53:51,493 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:53:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:53:51,494 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:53:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:53:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:53:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:54:51,494 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:54:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:54:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:54:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:54:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:54:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:55:51,494 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:55:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:55:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:55:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:55:51,504 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:55:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:56:51,490 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:56:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:56:51,493 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:56:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:56:51,495 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:56:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:57:51,495 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:57:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:57:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:57:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:57:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:57:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:58:51,495 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:58:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:58:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:58:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:58:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:58:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 13:59:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:59:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 13:59:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:59:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 13:59:51,504 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 13:59:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:00:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:00:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:00:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:00:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:00:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:00:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:01:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:01:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:01:51,502 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:01:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:01:51,506 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:01:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:02:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:02:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:02:51,502 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:02:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:02:51,506 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:02:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:03:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:03:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:03:51,502 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:03:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:03:51,507 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:03:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:04:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:04:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:04:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:04:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:04:51,502 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:04:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:05:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:05:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:05:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:05:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:05:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:05:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:06:51,496 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:06:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:06:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:06:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:06:51,497 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:06:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:07:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:07:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:07:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:07:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:07:51,502 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:07:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:08:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:08:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:08:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:08:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:08:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:08:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:09:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:09:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:09:51,501 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:09:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:09:51,504 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:09:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:10:51,501 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:10:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:10:51,501 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:10:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:10:51,504 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:10:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:11:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:11:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:11:51,501 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:11:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:11:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:11:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:12:51,498 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:12:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:12:51,499 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:12:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:12:51,500 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:12:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:13:51,503 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:13:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:13:51,505 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:13:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:13:51,509 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:13:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:14:51,444 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:14:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:14:51,449 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:14:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:14:51,452 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:14:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:15:51,445 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:15:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:15:51,449 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:15:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:15:51,452 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:15:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:16:51,443 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:16:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:16:51,449 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:16:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:16:51,452 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:16:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:17:51,443 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:17:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:17:51,447 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:17:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:17:51,451 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:17:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:18:51,444 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:18:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:18:51,445 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:18:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:18:51,451 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:18:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:19:51,442 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:19:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:19:51,447 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:19:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:19:51,450 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:19:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:20:51,442 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:20:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:20:51,446 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:20:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:20:51,450 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:20:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:21:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:21:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:21:51,446 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:21:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:21:51,450 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:21:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:22:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:22:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:22:51,445 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:22:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:22:51,448 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:22:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:23:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:23:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:23:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:23:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:23:51,444 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:23:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:24:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:24:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:24:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:24:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:24:51,443 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:24:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:25:51,440 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:25:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:25:51,440 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:25:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:25:51,444 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:25:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:26:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:26:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:26:51,439 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:26:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:26:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:26:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:27:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:27:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:27:51,440 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:27:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:27:51,442 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:27:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:28:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:28:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:28:51,446 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:28:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:28:51,450 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:28:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:29:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:29:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:29:51,439 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:29:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:29:51,444 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:29:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:30:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:30:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:30:51,443 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:30:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:30:51,446 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:30:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:31:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:31:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:31:51,442 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:31:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:31:51,447 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:31:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:32:51,435 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:32:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:32:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:32:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:32:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:32:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:33:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:33:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:33:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:33:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:33:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:33:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:34:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:34:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:34:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:34:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:34:51,439 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:34:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:35:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:35:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:35:51,440 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:35:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:35:51,445 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:35:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:36:51,425 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:36:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:36:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:36:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:36:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:36:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:37:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:37:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:37:51,440 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:37:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:37:51,444 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:37:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:38:51,424 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:38:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:38:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:38:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:38:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:38:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:39:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:39:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:39:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:39:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:39:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:39:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:40:51,424 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:40:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:40:51,427 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:40:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:40:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:40:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:41:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:41:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:41:51,439 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:41:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:41:51,443 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:41:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:42:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:42:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:42:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:42:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:42:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:42:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:43:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:43:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:43:51,430 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:43:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:43:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:43:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:44:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:44:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:44:51,439 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:44:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:44:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:44:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:45:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:45:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:45:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:45:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:45:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:45:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:46:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:46:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:46:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:46:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:46:51,435 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:46:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:47:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:47:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:47:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:47:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:47:51,441 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:47:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:48:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:48:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:48:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:48:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:48:51,440 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:48:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:49:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:49:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:49:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:49:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:49:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:49:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:50:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:50:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:50:51,435 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:50:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:50:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:50:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:51:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:51:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:51:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:51:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:51:51,435 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:51:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:52:51,430 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:52:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:52:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:52:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:52:51,437 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:52:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:53:51,424 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:53:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:53:51,425 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:53:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:53:51,428 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:53:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:54:51,427 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:54:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:54:51,430 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:54:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:54:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:54:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:55:51,430 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:55:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:55:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:55:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:55:51,438 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:55:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:56:51,428 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:56:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:56:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:56:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:56:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:56:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:57:51,427 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:57:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:57:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:57:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:57:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:57:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:58:51,426 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:58:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:58:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:58:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:58:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:58:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 14:59:51,425 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:59:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 14:59:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:59:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 14:59:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 14:59:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:00:51,427 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:00:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:00:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:00:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:00:51,435 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:00:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:01:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:01:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:01:51,430 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:01:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:01:51,436 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:01:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:02:51,424 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:02:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:02:51,427 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:02:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:02:51,430 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:02:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:03:51,426 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:03:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:03:51,432 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:03:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:03:51,434 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:03:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:04:51,426 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:04:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:04:51,431 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:04:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:04:51,433 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:04:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:05:51,424 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:05:51] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:05:51,427 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:05:51] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:05:51,429 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:05:51] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:09:44,460 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:09:44] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:09:44,461 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:09:44] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:09:44,463 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:09:44] "GET /api/status HTTP/1.1" 200 -
+2025-07-03 15:10:44,466 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:10:44] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-03 15:10:44,470 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:10:44] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-03 15:10:44,473 - werkzeug - INFO - 127.0.0.1 - - [03/Jul/2025 15:10:44] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 15:57:31,285 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 15:57:31,285 - src.hardware.robot_arm - INFO - ✅ 机械臂控制器初始化完成: virtual
+2025-07-05 15:57:31,285 - src.web_interface.app - INFO - 🤖 机械臂类型: 虚拟机械臂
+2025-07-05 15:57:31,285 - src.web_interface.app - INFO - 📋 功能特性: 垃圾分拣, 统计记录, 操作历史
+2025-07-05 15:57:31,285 - VirtualRobotArm - INFO - 🔌 连接虚拟机械臂...
+2025-07-05 15:57:31,790 - VirtualRobotArm - INFO - ✅ 虚拟机械臂连接成功
+2025-07-05 15:57:31,791 - src.web_interface.app - INFO - 🦾 机械臂初始化成功并已连接
+2025-07-05 15:57:31,791 - VirtualRobotArm - INFO - 🏠 机械臂归位中...
+2025-07-05 15:57:31,791 - VirtualRobotArm - INFO - ✅ 机械臂归位完成
+2025-07-05 15:57:31,791 - src.web_interface.app - INFO - 🏠 机械臂已归位
+2025-07-05 15:57:31,791 - src.web_interface.app - INFO - ⚙️ 机械臂配置: 最大半径 800.0mm, 最大负载 5.0kg
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO - 🗑️ 已配置 9 个垃圾桶:
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 塑料垃圾桶: (600.0, 200.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 厨余垃圾桶: (600.0, 100.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 饮料瓶回收桶: (600.0, 0.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 纸盒回收桶: (600.0, -100.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 零食垃圾桶: (600.0, -200.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 厨余垃圾桶2: (500.0, 200.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 包装垃圾桶: (500.0, 100.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 纸盒回收桶1: (500.0, 0.0, 50.0)
+2025-07-05 15:57:31,792 - src.web_interface.app - INFO -   • 纸盒回收桶2: (500.0, -100.0, 50.0)
+2025-07-05 15:57:31,831 - src.models.detector - INFO - 成功加载检测模型: models/best.pt
+2025-07-05 15:57:32,489 - src.models.detector - INFO - 模型预热完成
+2025-07-05 15:57:32,489 - src.web_interface.app - INFO - ✅ 默认模型已加载: models/best.pt
+2025-07-05 15:57:32,538 - VirtualRobotArm - INFO - 🔌 断开虚拟机械臂连接...
+2025-07-05 15:57:32,538 - VirtualRobotArm - INFO - ✅ 虚拟机械臂已断开连接
+2025-07-05 15:59:21,515 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 15:59:21,515 - src.hardware.robot_arm - INFO - ✅ 机械臂控制器初始化完成: virtual
+2025-07-05 15:59:21,515 - src.web_interface.app - INFO - 🤖 机械臂类型: 虚拟机械臂
+2025-07-05 15:59:21,515 - src.web_interface.app - INFO - 📋 功能特性: 垃圾分拣, 统计记录, 操作历史
+2025-07-05 15:59:21,515 - VirtualRobotArm - INFO - 🔌 连接虚拟机械臂...
+2025-07-05 15:59:22,021 - VirtualRobotArm - INFO - ✅ 虚拟机械臂连接成功
+2025-07-05 15:59:22,021 - src.web_interface.app - INFO - 🦾 机械臂初始化成功并已连接
+2025-07-05 15:59:22,021 - VirtualRobotArm - INFO - 🏠 机械臂归位中...
+2025-07-05 15:59:22,021 - VirtualRobotArm - INFO - ✅ 机械臂归位完成
+2025-07-05 15:59:22,021 - src.web_interface.app - INFO - 🏠 机械臂已归位
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO - ⚙️ 机械臂配置: 最大半径 800.0mm, 最大负载 5.0kg
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO - 🗑️ 已配置 9 个垃圾桶:
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 塑料垃圾桶: (600.0, 200.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 厨余垃圾桶: (600.0, 100.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 饮料瓶回收桶: (600.0, 0.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 纸盒回收桶: (600.0, -100.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 零食垃圾桶: (600.0, -200.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 厨余垃圾桶2: (500.0, 200.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 包装垃圾桶: (500.0, 100.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 纸盒回收桶1: (500.0, 0.0, 50.0)
+2025-07-05 15:59:22,022 - src.web_interface.app - INFO -   • 纸盒回收桶2: (500.0, -100.0, 50.0)
+2025-07-05 15:59:22,043 - src.models.detector - INFO - 成功加载检测模型: models/best.pt
+2025-07-05 15:59:22,276 - src.models.detector - INFO - 模型预热完成
+2025-07-05 15:59:22,276 - src.web_interface.app - INFO - ✅ 默认模型已加载: models/best.pt
+2025-07-05 15:59:22,290 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.2:5001
+2025-07-05 15:59:22,291 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-05 15:59:24,730 - VirtualRobotArm - INFO - 🔌 断开虚拟机械臂连接...
+2025-07-05 15:59:24,730 - VirtualRobotArm - INFO - ✅ 虚拟机械臂已断开连接
+2025-07-05 16:25:13,911 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 16:25:13,911 - src.hardware.robot_arm - INFO - ✅ 机械臂控制器初始化完成: virtual
+2025-07-05 16:25:13,911 - src.web_interface.app - INFO - 🤖 机械臂类型: 虚拟机械臂
+2025-07-05 16:25:13,911 - src.web_interface.app - INFO - 📋 功能特性: 垃圾分拣, 统计记录, 操作历史
+2025-07-05 16:25:13,911 - VirtualRobotArm - INFO - 🔌 连接虚拟机械臂...
+2025-07-05 16:25:14,416 - VirtualRobotArm - INFO - ✅ 虚拟机械臂连接成功
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO - 🦾 机械臂初始化成功并已连接
+2025-07-05 16:25:14,416 - VirtualRobotArm - INFO - 🏠 机械臂归位中...
+2025-07-05 16:25:14,416 - VirtualRobotArm - INFO - ✅ 机械臂归位完成
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO - 🏠 机械臂已归位
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO - ⚙️ 机械臂配置: 最大半径 800.0mm, 最大负载 5.0kg
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO - 🗑️ 已配置 9 个垃圾桶:
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO -   • 塑料垃圾桶: (600.0, 200.0, 50.0)
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO -   • 厨余垃圾桶: (600.0, 100.0, 50.0)
+2025-07-05 16:25:14,416 - src.web_interface.app - INFO -   • 饮料瓶回收桶: (600.0, 0.0, 50.0)
+2025-07-05 16:25:14,417 - src.web_interface.app - INFO -   • 纸盒回收桶: (600.0, -100.0, 50.0)
+2025-07-05 16:25:14,417 - src.web_interface.app - INFO -   • 零食垃圾桶: (600.0, -200.0, 50.0)
+2025-07-05 16:25:14,417 - src.web_interface.app - INFO -   • 厨余垃圾桶2: (500.0, 200.0, 50.0)
+2025-07-05 16:25:14,417 - src.web_interface.app - INFO -   • 包装垃圾桶: (500.0, 100.0, 50.0)
+2025-07-05 16:25:14,417 - src.web_interface.app - INFO -   • 纸盒回收桶1: (500.0, 0.0, 50.0)
+2025-07-05 16:25:14,417 - src.web_interface.app - INFO -   • 纸盒回收桶2: (500.0, -100.0, 50.0)
+2025-07-05 16:25:14,442 - src.models.detector - INFO - 成功加载检测模型: models/best.pt
+2025-07-05 16:25:14,708 - src.models.detector - INFO - 模型预热完成
+2025-07-05 16:25:14,708 - src.web_interface.app - INFO - ✅ 默认模型已加载: models/best.pt
+2025-07-05 16:25:14,716 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.19.0.1:5001
+2025-07-05 16:25:14,716 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-05 16:26:17,330 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:17] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:17,331 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 16:26:17,332 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:17] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:17,332 - src.hardware.robot_arm_interface - ERROR - UR机械臂驱动未安装
+2025-07-05 16:26:17,332 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:17] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:17,333 - src.hardware.robot_arm_interface - ERROR - KUKA机械臂驱动未安装
+2025-07-05 16:26:17,333 - src.hardware.robot_arm_interface - ERROR - 不支持的机械臂类型: abb
+2025-07-05 16:26:17,334 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:17] "GET /api/robot_arm/types HTTP/1.1" 200 -
+2025-07-05 16:26:22,329 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:22] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:22,330 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:22] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:24,655 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:24] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:24,656 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 16:26:24,657 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:24] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:24,658 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:24] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:24,658 - src.hardware.robot_arm_interface - ERROR - UR机械臂驱动未安装
+2025-07-05 16:26:24,659 - src.hardware.robot_arm_interface - ERROR - KUKA机械臂驱动未安装
+2025-07-05 16:26:24,659 - src.hardware.robot_arm_interface - ERROR - 不支持的机械臂类型: abb
+2025-07-05 16:26:24,660 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:24] "GET /api/robot_arm/types HTTP/1.1" 200 -
+2025-07-05 16:26:27,480 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:27] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:27,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:27] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:29,656 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:29] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:29,658 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:29] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:32,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:32] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:32,482 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:32] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:32,485 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:32] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:34,655 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:34] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:34,657 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:34] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:37,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:37] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:37,482 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:37] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:39,656 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:39] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:39,656 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:39] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:39,659 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:39] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:42,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:42] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:42,483 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:42] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:44,655 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:44] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:44,655 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:44] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:47,482 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:47] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:47,483 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:47] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:47,486 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:47] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:49,656 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:49] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:49,659 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:49] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:52,479 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:52] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:52,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:52] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:52,654 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 16:26:52,655 - src.hardware.robot_arm_interface - ERROR - UR机械臂驱动未安装
+2025-07-05 16:26:52,655 - src.hardware.robot_arm_interface - ERROR - KUKA机械臂驱动未安装
+2025-07-05 16:26:52,655 - src.hardware.robot_arm_interface - ERROR - 不支持的机械臂类型: abb
+2025-07-05 16:26:52,655 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:52] "GET /api/robot_arm/types HTTP/1.1" 200 -
+2025-07-05 16:26:52,656 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:52] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:52,658 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:52] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:52,661 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:52] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:57,480 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:57] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:57,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:57] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:57,655 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:57] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:57,656 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:57] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:59,539 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:59] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:59,539 - VirtualRobotArm - INFO - 🦾 虚拟机械臂已初始化
+2025-07-05 16:26:59,540 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:59] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:26:59,541 - src.hardware.robot_arm_interface - ERROR - UR机械臂驱动未安装
+2025-07-05 16:26:59,541 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:59] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:26:59,542 - src.hardware.robot_arm_interface - ERROR - KUKA机械臂驱动未安装
+2025-07-05 16:26:59,542 - src.hardware.robot_arm_interface - ERROR - 不支持的机械臂类型: abb
+2025-07-05 16:26:59,542 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:26:59] "GET /api/robot_arm/types HTTP/1.1" 200 -
+2025-07-05 16:27:01,954 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:01] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:01,955 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:01] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:02,479 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:02] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:02,480 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:02] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:27:02,979 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:02] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:03,944 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:03] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:04,945 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:04] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:05,950 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:05] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:06,935 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:06] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:07,479 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:07] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:07,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:07] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:27:07,483 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:07] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:07,949 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:07] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:08,938 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:08] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:09,939 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:09] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:10,943 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:10] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:11,934 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:11] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:12,479 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:12] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:12,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:12] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:27:12,944 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:12] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:13,944 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:13] "POST /api/detect_image HTTP/1.1" 200 -
+2025-07-05 16:27:14,544 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:14] "OPTIONS /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:14,546 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:14] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
+2025-07-05 16:27:14,549 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:14] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:17,481 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:17] "GET /api/status HTTP/1.1" 200 -
+2025-07-05 16:27:17,484 - werkzeug - INFO - 127.0.0.1 - - [05/Jul/2025 16:27:17] "GET /api/robot_arm/current_config HTTP/1.1" 200 -
