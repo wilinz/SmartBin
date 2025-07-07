@@ -312,7 +312,7 @@ cache/
 # ================================================
 
 # Ignore models directory completely
-models/
+/models/
 
 # Keep dataset directory structure but ignore actual data files
 !data/
