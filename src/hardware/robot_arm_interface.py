@@ -461,7 +461,7 @@ def create_robot_arm(arm_type: str, config: Optional[Dict] = None) -> Optional[R
     工厂函数：根据类型创建机械臂实例
     
     Args:
-        arm_type: 机械臂类型 ('virtual', 'ur', 'kuka', 'abb', ...)
+        arm_type: 机械臂类型 ('virtual', 'uarm')
         config: 配置参数
         
     Returns:
@@ -471,24 +471,17 @@ def create_robot_arm(arm_type: str, config: Optional[Dict] = None) -> Optional[R
         if arm_type.lower() == 'virtual':
             from .robot_arm_virtual import VirtualRobotArm
             return VirtualRobotArm(config)
-        elif arm_type.lower() == 'ur':
-            # 示例：Universal Robots机械臂
+        elif arm_type.lower() == 'uarm':
+            # uArm 机械臂
             try:
-                from .robot_arm_ur import URRobotArm
-                return URRobotArm(config)
-            except ImportError:
-                logger.error("UR机械臂驱动未安装")
-                return None
-        elif arm_type.lower() == 'kuka':
-            # 示例：KUKA机械臂
-            try:
-                from .robot_arm_kuka import KukaRobotArm
-                return KukaRobotArm(config)
-            except ImportError:
-                logger.error("KUKA机械臂驱动未安装")
+                from .robot_arm_uarm import UarmRobotArm
+                return UarmRobotArm(config)
+            except ImportError as e:
+                logger.error(f"uArm机械臂驱动未安装: {e}")
                 return None
         else:
             logger.error(f"不支持的机械臂类型: {arm_type}")
+            logger.info("支持的机械臂类型: virtual, uarm")
             return None
     except Exception as e:
         logger.error(f"创建机械臂实例失败: {e}")

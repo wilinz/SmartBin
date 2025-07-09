@@ -13,61 +13,78 @@ camera:
 # 机械臂配置
 robot_arm:
   enabled: true
+  type: "virtual"       # 机械臂类型: virtual, uarm
   virtual_mode: true    # 启用虚拟机械臂模式
-  port: "/dev/ttyUSB0"  # Linux下的串口，Windows下为COM端口
-  baudrate: 115200
-  timeout: 1.0
+  
+  # uArm 机械臂配置
+  uarm:
+    port: null          # 串口端口，null表示自动检测
+    baudrate: 115200
+    speed_factor: 100   # 速度系数 (1-100)
+    timeout: 1.0
   
   # 位置配置 (单位: 毫米和度)
   positions:
     home:        # 初始位置
-      x: 200
-      y: 0
-      z: 150
+      x: 115
+      y: -3
+      z: 45
       rotation: 0
     
     # 货物拾取位置
-    pickup_positions:
-      position_1:
-        x: 150
-        y: -100
-        z: 50
-        rotation: 0
-      position_2:
-        x: 200
-        y: -100
-        z: 50
-        rotation: 0
-      position_3:
-        x: 250
-        y: -100
-        z: 50
-        rotation: 0
+    pickup_position:
+      x: 115
+      y: -3
+      z: 45
+      rotation: 0
     
-    # 垃圾桶投放位置
+    # 垃圾桶投放位置（与 uArm 实现保持一致）
     drop_positions:
-      organic:     # 有机垃圾桶
-        x: 100
-        y: 150
-        z: 100
-        rotation: 0
-      recyclable:  # 可回收垃圾桶
+      banana:         # 香蕉皮 - 厨余垃圾
         x: 200
-        y: 150
-        z: 100
-        rotation: 0
-      other:       # 其他垃圾桶
-        x: 300
-        y: 150
-        z: 100
-        rotation: 0
+        y: 50
+        z: 50
+      beverages:      # 饮料瓶 - 可回收垃圾
+        x: 200
+        y: -50
+        z: 50
+      cardboard_box:  # 纸盒 - 可回收垃圾
+        x: 150
+        y: 50
+        z: 50
+      chips:          # 薯片袋 - 其他垃圾
+        x: 150
+        y: -50
+        z: 50
+      fish_bones:     # 鱼骨 - 厨余垃圾
+        x: 250
+        y: 50
+        z: 50
+      instant_noodles: # 泡面盒 - 其他垃圾
+        x: 250
+        y: -50
+        z: 50
+      milk_box_type1:  # 牛奶盒1 - 可回收垃圾
+        x: 180
+        y: 30
+        z: 50
+      milk_box_type2:  # 牛奶盒2 - 可回收垃圾
+        x: 180
+        y: -30
+        z: 50
+      plastic:        # 塑料 - 可回收垃圾
+        x: 220
+        y: 0
+        z: 50
 
   # 运动参数
   motion:
     speed: 50          # 运动速度 (mm/s)
     acceleration: 100  # 加速度 (mm/s²)
-    precision: 2       # 定位精度 (mm)
-    grip_force: 50     # 夹持力度 (0-100)
+    precision: 1       # 定位精度 (mm)
+    max_reach: 350     # 最大工作半径 (mm)
+    max_payload: 500   # 最大负载 (g)
+    degrees_of_freedom: 3  # 自由度
 
 # 传感器配置
 sensors:

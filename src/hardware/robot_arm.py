@@ -61,6 +61,9 @@ class RobotArmController:
         try:
             if self.arm_type.lower() == 'virtual':
                 return VirtualRobotArm(self.config)
+            elif self.arm_type.lower() == 'uarm':
+                from .robot_arm_uarm import UarmRobotArm
+                return UarmRobotArm(self.config)
             else:
                 # 使用工厂函数创建其他类型的机械臂
                 return create_robot_arm(self.arm_type, self.config)
@@ -314,7 +317,7 @@ def create_robot_arm_controller(arm_type: str = 'virtual', config: Optional[Dict
     工厂函数：创建机械臂控制器
     
     Args:
-        arm_type: 机械臂类型 ('virtual', 'ur', 'kuka', 等)
+        arm_type: 机械臂类型 ('virtual', 'uarm')
         config: 配置参数
         
     Returns:
@@ -329,7 +332,7 @@ def create_robot_arm_controller(arm_type: str = 'virtual', config: Optional[Dict
 
 def get_supported_arm_types() -> List[str]:
     """获取支持的机械臂类型列表"""
-    return ['virtual', 'ur', 'kuka', 'abb']
+    return ['virtual', 'uarm']
 
 def get_arm_type_info(arm_type: str) -> Dict:
     """获取机械臂类型信息"""
@@ -340,19 +343,12 @@ def get_arm_type_info(arm_type: str) -> Dict:
             'features': ['垃圾分拣', '统计记录', '操作历史'],
             'config_required': False
         },
-        'ur': {
-            'name': 'Universal Robots',
-            'description': 'UR系列协作机械臂',
-            'features': ['TCP通信', '实时控制', '力控制'],
-            'config_required': True,
-            'config_fields': ['host', 'port']
-        },
-        'kuka': {
-            'name': 'KUKA机械臂',
-            'description': 'KUKA工业机械臂',
-            'features': ['KRL编程', '高精度', '重载能力'],
-            'config_required': True,
-            'config_fields': ['host', 'port', 'krl_config']
+        'uarm': {
+            'name': 'uArm机械臂',
+            'description': 'uArm Swift/Swift Pro 机械臂',
+            'features': ['垃圾分拣', '串口通信', '吸盘抓取', '实时控制'],
+            'config_required': False,
+            'config_fields': ['port', 'baudrate', 'speed_factor']
         }
     }
     
