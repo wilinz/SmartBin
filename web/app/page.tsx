@@ -82,6 +82,12 @@ export default function SmartBinDashboard() {
   const [detectionFps, setDetectionFps] = useState<number>(1) // 每秒检测次数
   const [armTriggerConfidence, setArmTriggerConfidence] = useState<number>(0.7) // 机械臂触发置信度
   
+  // 镜头矫正相关状态
+  const [calibrationEnabled, setCalibrationEnabled] = useState<boolean>(false)
+  const [calibrationParams, setCalibrationParams] = useState<any>(null)
+  const [undistortMaps, setUndistortMaps] = useState<any>(null)
+  const [correctionQuality, setCorrectionQuality] = useState<number>(1) // 1=高质量, 2=中等, 3=低质量
+  
   // 机械臂管理相关状态
   const [robotArmTypes, setRobotArmTypes] = useState<RobotArmType[]>([])
   const [currentArmConfig, setCurrentArmConfig] = useState<RobotArmConfig | null>(null)
@@ -134,6 +140,11 @@ export default function SmartBinDashboard() {
       // 绘制视频帧
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
       
+      // 应用镜头矫正到预览画面
+      if (calibrationEnabled && undistortMaps) {
+        applyLensCorrection(canvas, ctx)
+      }
+      
       // 绘制检测框
       if (currentDetections.length > 0) {
         drawDetections(ctx, currentDetections, canvas.width, canvas.height)
@@ -144,7 +155,7 @@ export default function SmartBinDashboard() {
     const frameInterval = setInterval(drawVideoFrame, 33)
 
     return () => clearInterval(frameInterval)
-  }, [isLiveDetecting, currentDetections])
+  }, [isLiveDetecting, currentDetections, calibrationEnabled, undistortMaps, correctionQuality])
 
   // 获取系统状态
   const fetchSystemStatus = async () => {
@@ -435,6 +446,11 @@ export default function SmartBinDashboard() {
 
       context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height)
 
+      // 应用镜头矫正
+      if (calibrationEnabled && undistortMaps) {
+        applyLensCorrection(canvas, context)
+      }
+
       canvas.toBlob(async (blob: Blob | null) => {
         if (!blob) return
 
@@ -564,11 +580,166 @@ export default function SmartBinDashboard() {
     }
   }, [stream, detectionInterval])
 
+  // 加载相机标定参数
+  const loadCalibrationParams = async () => {
+    try {
+      const response = await fetch(API_ENDPOINTS.CAMERA_CALIBRATION)
+      if (response.ok) {
+        const params = await response.json()
+        setCalibrationParams(params)
+        console.log('✅ 相机标定参数加载成功:', params)
+        return params
+      } else {
+        console.warn('⚠️ 相机标定参数文件未找到，跳过镜头矫正')
+        return null
+      }
+    } catch (err) {
+      console.error('❌ 加载相机标定参数失败:', err)
+      return null
+    }
+  }
+
+  // 创建畸变矫正映射表
+  const createUndistortMaps = (params: any) => {
+    if (!params) return null
+    
+    try {
+      const { K, D, img_shape } = params
+      const width = img_shape[0]
+      const height = img_shape[1]
+      
+      // 在前端创建映射表的简化版本
+      // 实际应用中，我们会在处理每帧时直接应用矫正公式
+      const maps = {
+        K: K,
+        D: D,
+        width: width,
+        height: height
+      }
+      
+      setUndistortMaps(maps)
+      console.log('✅ 畸变矫正映射表创建成功')
+      return maps
+    } catch (err) {
+      console.error('❌ 创建畸变矫正映射表失败:', err)
+      return null
+    }
+  }
+
+  // 应用镜头矫正（优化版本）
+  const applyLensCorrection = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+    if (!calibrationEnabled || !undistortMaps) return
+    
+    try {
+      // 获取原始图像数据
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      const data = imageData.data
+      
+      // 创建输出图像数据
+      const outputData = new Uint8ClampedArray(data.length)
+      
+      // 应用鱼眼矫正（优化版本）
+      const { K, D, width, height } = undistortMaps
+      const cx = K[0][2]
+      const cy = K[1][2]
+      const fx = K[0][0]
+      const fy = K[1][1]
+      
+      // 将畸变系数从二维数组转换为一维数组
+      const distCoeffs = D.flat()
+      
+      // 使用步长优化，减少计算量
+      const step = correctionQuality // 1=高质量, 2=中等, 3=低质量
+      
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          // 归一化坐标
+          const xn = (x - cx) / fx
+          const yn = (y - cy) / fy
+          
+          // 计算径向距离
+          const r = Math.sqrt(xn * xn + yn * yn)
+          
+          // 应用畸变矫正（鱼眼模型）
+          const r2 = r * r
+          const r4 = r2 * r2
+          const radial = 1 + distCoeffs[0] * r2 + distCoeffs[1] * r4 + distCoeffs[2] * r2 * r4 + distCoeffs[3] * r4 * r4
+          
+          // 矫正后的坐标
+          const xu = xn * radial
+          const yu = yn * radial
+          
+          // 转换回像素坐标
+          const xd = Math.round(xu * fx + cx)
+          const yd = Math.round(yu * fy + cy)
+          
+          // 边界检查和像素复制
+          if (xd >= 0 && xd < width && yd >= 0 && yd < height) {
+            const srcIndex = (y * width + x) * 4
+            const dstIndex = (yd * width + xd) * 4
+            
+            if (srcIndex < data.length && dstIndex < outputData.length) {
+              outputData[dstIndex] = data[srcIndex]         // R
+              outputData[dstIndex + 1] = data[srcIndex + 1] // G
+              outputData[dstIndex + 2] = data[srcIndex + 2] // B
+              outputData[dstIndex + 3] = data[srcIndex + 3] // A
+              
+              // 如果使用步长，填充邻近像素
+              if (step > 1) {
+                for (let dy = 0; dy < step && (yd + dy) < height; dy++) {
+                  for (let dx = 0; dx < step && (xd + dx) < width; dx++) {
+                    const fillIndex = ((yd + dy) * width + (xd + dx)) * 4
+                    if (fillIndex < outputData.length) {
+                      outputData[fillIndex] = data[srcIndex]
+                      outputData[fillIndex + 1] = data[srcIndex + 1]
+                      outputData[fillIndex + 2] = data[srcIndex + 2]
+                      outputData[fillIndex + 3] = data[srcIndex + 3]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      // 应用矫正后的图像数据
+      const correctedImageData = new ImageData(outputData, width, height)
+      ctx.putImageData(correctedImageData, 0, 0)
+      
+    } catch (err) {
+      console.error('❌ 应用镜头矫正失败:', err)
+    }
+  }
+
+  // 切换镜头矫正
+  const toggleCalibration = async () => {
+    if (!calibrationEnabled && !calibrationParams) {
+      // 首次启用，加载参数
+      const params = await loadCalibrationParams()
+      if (params) {
+        createUndistortMaps(params)
+        setCalibrationEnabled(true)
+        console.log('✅ 镜头矫正已启用')
+      }
+    } else {
+      setCalibrationEnabled(!calibrationEnabled)
+      console.log(calibrationEnabled ? '❌ 镜头矫正已禁用' : '✅ 镜头矫正已启用')
+    }
+  }
+
   // 页面加载时获取系统状态
   useEffect(() => {
     fetchSystemStatus()
     fetchRobotArmTypes()
     fetchCurrentArmConfig()
+    
+    // 尝试加载相机标定参数
+    loadCalibrationParams().then(params => {
+      if (params) {
+        createUndistortMaps(params)
+      }
+    })
     
     const interval = setInterval(() => {
       if (!isLiveDetectingRef.current) {
@@ -655,6 +826,83 @@ export default function SmartBinDashboard() {
                   ? '✅ 模型已加载'
                   : '📥 加载检测模型'}
               </button>
+            </div>
+
+            {/* 摄像头控制 */}
+            <div className="mb-6">
+              <h3 className="text-lg font-medium mb-3">📹 摄像头控制</h3>
+              <div className="space-y-3">
+                {/* 镜头矫正开关 */}
+                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div>
+                    <span className="font-medium text-gray-800">镜头矫正</span>
+                    <p className="text-sm text-gray-600">修正鱼眼镜头畸变</p>
+                  </div>
+                  <button
+                    onClick={toggleCalibration}
+                    disabled={isLiveDetecting}
+                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                      calibrationEnabled
+                        ? 'bg-green-500 hover:bg-green-600 text-white'
+                        : 'bg-gray-300 hover:bg-gray-400 text-gray-700'
+                    } ${isLiveDetecting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  >
+                    {calibrationEnabled ? '✅ 已启用' : '❌ 已禁用'}
+                  </button>
+                </div>
+
+                {/* 标定参数状态 */}
+                {calibrationParams && (
+                  <div className="p-3 bg-blue-50 rounded-lg">
+                    <h4 className="font-medium text-blue-800 mb-2">📋 标定参数</h4>
+                    <div className="text-sm text-blue-700 space-y-1">
+                      <div>图像尺寸: {calibrationParams.img_shape[0]}x{calibrationParams.img_shape[1]}</div>
+                      <div>焦距: fx={calibrationParams.K[0][0].toFixed(2)}, fy={calibrationParams.K[1][1].toFixed(2)}</div>
+                      <div>光心: cx={calibrationParams.K[0][2].toFixed(2)}, cy={calibrationParams.K[1][2].toFixed(2)}</div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 矫正质量调节 */}
+                {calibrationParams && (
+                  <div className="p-3 bg-purple-50 rounded-lg">
+                    <h4 className="font-medium text-purple-800 mb-2">⚙️ 矫正质量</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-purple-700">处理精度</span>
+                        <select 
+                          value={correctionQuality} 
+                          onChange={(e) => setCorrectionQuality(Number(e.target.value))}
+                          disabled={isLiveDetecting}
+                          className="px-2 py-1 text-sm border rounded"
+                        >
+                          <option value={1}>高质量 (慢)</option>
+                          <option value={2}>中等质量</option>
+                          <option value={3}>低质量 (快)</option>
+                        </select>
+                      </div>
+                      <div className="text-xs text-purple-600">
+                        {correctionQuality === 1 && "最佳画质，处理较慢"}
+                        {correctionQuality === 2 && "平衡画质与性能"}
+                        {correctionQuality === 3 && "快速处理，画质略低"}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 矫正状态提示 */}
+                {isLiveDetecting && (
+                  <div className={`p-2 rounded-lg text-sm ${
+                    calibrationEnabled
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {calibrationEnabled
+                      ? `🔧 镜头矫正正在应用中 (${correctionQuality === 1 ? '高质量' : correctionQuality === 2 ? '中等质量' : '低质量'})`
+                      : '⚠️ 镜头矫正已禁用，图像可能有畸变'}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* 机械臂管理 */}

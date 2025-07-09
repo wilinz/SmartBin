@@ -51,7 +51,8 @@ export const API_ENDPOINTS = {
   ROBOT_ARM_CURRENT_CONFIG: '/api/robot_arm/current_config',
   ROBOT_ARM_SWITCH_TYPE: '/api/robot_arm/switch_type',
   ROBOT_ARM_CONNECT: '/api/robot_arm/connect',
-  ROBOT_ARM_DISCONNECT: '/api/robot_arm/disconnect'
+  ROBOT_ARM_DISCONNECT: '/api/robot_arm/disconnect',
+  CAMERA_CALIBRATION: '/camera_calibration.json'
 } as const
 
 /**
