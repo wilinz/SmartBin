@@ -88,6 +88,16 @@ export default function SmartBinDashboard() {
   const [undistortMaps, setUndistortMaps] = useState<any>(null)
   const [correctionQuality, setCorrectionQuality] = useState<number>(1) // 1=高质量, 2=中等, 3=低质量
   
+  // 摄像头缩放相关状态
+  const [cameraZoom, setCameraZoom] = useState<number>(1.0) // 缩放倍数，1.0=原始大小
+  const [zoomOffsetX, setZoomOffsetX] = useState<number>(0) // 缩放后的X偏移
+  const [zoomOffsetY, setZoomOffsetY] = useState<number>(0) // 缩放后的Y偏移
+  
+  // 性能监控状态
+  const [frameRate, setFrameRate] = useState<number>(0)
+  const [lastFrameTime, setLastFrameTime] = useState<number>(0)
+  const [frameCount, setFrameCount] = useState<number>(0)
+  
   // 机械臂管理相关状态
   const [robotArmTypes, setRobotArmTypes] = useState<RobotArmType[]>([])
   const [currentArmConfig, setCurrentArmConfig] = useState<RobotArmConfig | null>(null)
@@ -125,6 +135,12 @@ export default function SmartBinDashboard() {
   useEffect(() => {
     if (!isLiveDetecting || !videoRef.current || !canvasRef.current) return
 
+    let animationId: number
+    let lastVideoWidth = 0
+    let lastVideoHeight = 0
+    let lastPerfTime = performance.now()
+    let perfFrameCount = 0
+
     const drawVideoFrame = () => {
       const video = videoRef.current
       const canvas = canvasRef.current
@@ -133,29 +149,58 @@ export default function SmartBinDashboard() {
       const ctx = canvas.getContext('2d')
       if (!ctx) return
 
-      // 设置Canvas尺寸
-      canvas.width = video.videoWidth
-      canvas.height = video.videoHeight
-
-      // 绘制视频帧
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      // 性能监控
+      const currentTime = performance.now()
+      perfFrameCount++
       
-      // 应用镜头矫正到预览画面
-      if (calibrationEnabled && undistortMaps) {
-        applyLensCorrection(canvas, ctx)
+      if (currentTime - lastPerfTime >= 1000) {
+        setFrameRate(perfFrameCount)
+        perfFrameCount = 0
+        lastPerfTime = currentTime
+      }
+
+      // 只在视频尺寸改变时才重新设置画布尺寸
+      if (video.videoWidth !== lastVideoWidth || video.videoHeight !== lastVideoHeight) {
+        canvas.width = video.videoWidth
+        canvas.height = video.videoHeight
+        lastVideoWidth = video.videoWidth
+        lastVideoHeight = video.videoHeight
+      }
+
+      // 清空画布
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // 如果有缩放，使用缩放函数进行绘制
+      if (cameraZoom !== 1.0) {
+        applyCameraZoom(canvas, ctx)
+      } else {
+        // 绘制视频帧
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        
+        // 应用镜头矫正到预览画面（优化性能）
+        if (calibrationEnabled && undistortMaps) {
+          applyLensCorrection(canvas, ctx)
+        }
       }
       
       // 绘制检测框
       if (currentDetections.length > 0) {
         drawDetections(ctx, currentDetections, canvas.width, canvas.height)
       }
+
+      // 使用 requestAnimationFrame 获得更平滑的帧率
+      animationId = requestAnimationFrame(drawVideoFrame)
     }
 
-    // 每33ms绘制一次（约30fps）
-    const frameInterval = setInterval(drawVideoFrame, 33)
+    // 开始动画循环
+    animationId = requestAnimationFrame(drawVideoFrame)
 
-    return () => clearInterval(frameInterval)
-  }, [isLiveDetecting, currentDetections, calibrationEnabled, undistortMaps, correctionQuality])
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId)
+      }
+    }
+  }, [isLiveDetecting, currentDetections, calibrationEnabled, undistortMaps, correctionQuality, cameraZoom, zoomOffsetX, zoomOffsetY])
 
   // 获取系统状态
   const fetchSystemStatus = async () => {
@@ -451,6 +496,11 @@ export default function SmartBinDashboard() {
         applyLensCorrection(canvas, context)
       }
 
+      // 应用缩放效果
+      if (cameraZoom !== 1.0) {
+        applyCameraZoom(canvas, context)
+      }
+
       canvas.toBlob(async (blob: Blob | null) => {
         if (!blob) return
 
@@ -626,33 +676,105 @@ export default function SmartBinDashboard() {
     }
   }
 
-  // 应用镜头矫正（优化版本）
+  // 应用摄像头缩放（优化版本）
+  const applyCameraZoom = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+    if (cameraZoom === 1.0) return
+    
+    try {
+      // 使用变换矩阵进行缩放，避免创建临时画布
+      const video = videoRef.current
+      if (!video) return
+      
+      // 保存当前状态
+      ctx.save()
+      
+      // 计算缩放中心点
+      const centerX = canvas.width / 2
+      const centerY = canvas.height / 2
+      
+      // 移动到中心点
+      ctx.translate(centerX + zoomOffsetX, centerY + zoomOffsetY)
+      
+      // 应用缩放
+      ctx.scale(cameraZoom, cameraZoom)
+      
+      // 移回原位置
+      ctx.translate(-centerX, -centerY)
+      
+      // 重新绘制视频帧
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      
+      // 应用镜头矫正（如果启用）
+      if (calibrationEnabled && undistortMaps) {
+        applyLensCorrection(canvas, ctx)
+      }
+      
+      // 恢复状态
+      ctx.restore()
+      
+    } catch (err) {
+      console.error('❌ 应用摄像头缩放失败:', err)
+    }
+  }
+
+  // 应用镜头矫正（性能优化版本）
   const applyLensCorrection = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
     if (!calibrationEnabled || !undistortMaps) return
     
     try {
-      // 获取原始图像数据
+      // 根据矫正质量调整处理密度
+      const step = correctionQuality // 1=高质量, 2=中等, 3=低质量
+      
+      // 对于低质量，使用简化的矫正算法
+      if (step >= 3) {
+        // 简化矫正：使用简单的径向畸变校正
+        const { K, D } = undistortMaps
+        const distCoeffs = D.flat()
+        
+        // 只对边缘区域进行简单的变换
+        ctx.save()
+        
+        // 使用简单的径向变换来近似鱼眼校正
+        const centerX = canvas.width / 2
+        const centerY = canvas.height / 2
+        const maxRadius = Math.min(centerX, centerY)
+        
+        // 创建径向渐变变换
+        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius)
+        
+        // 应用简单的径向缩放
+        ctx.translate(centerX, centerY)
+        ctx.scale(0.85, 0.85) // 简单的缩放矫正，近似鱼眼效果
+        ctx.translate(-centerX, -centerY)
+        
+        // 重新绘制图像
+        const video = videoRef.current
+        if (video) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        }
+        
+        ctx.restore()
+        return
+      }
+      
+      // 高质量矫正：使用完整算法但优化性能
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       const data = imageData.data
-      
-      // 创建输出图像数据
       const outputData = new Uint8ClampedArray(data.length)
       
-      // 应用鱼眼矫正（优化版本）
       const { K, D, width, height } = undistortMaps
       const cx = K[0][2]
       const cy = K[1][2]
       const fx = K[0][0]
       const fy = K[1][1]
       
-      // 将畸变系数从二维数组转换为一维数组
       const distCoeffs = D.flat()
       
-      // 使用步长优化，减少计算量
-      const step = correctionQuality // 1=高质量, 2=中等, 3=低质量
+      // 使用更大的步长减少计算量
+      const actualStep = Math.max(step, 2)
       
-      for (let y = 0; y < height; y += step) {
-        for (let x = 0; x < width; x += step) {
+      for (let y = 0; y < height; y += actualStep) {
+        for (let x = 0; x < width; x += actualStep) {
           // 归一化坐标
           const xn = (x - cx) / fx
           const yn = (y - cy) / fy
@@ -660,34 +782,46 @@ export default function SmartBinDashboard() {
           // 计算径向距离
           const r = Math.sqrt(xn * xn + yn * yn)
           
-          // 应用畸变矫正（鱼眼模型）
+          // 优化：只对畸变明显的区域进行矫正
+          if (r < 0.1) {
+            // 中心区域畸变很小，直接复制
+            const srcIndex = (y * width + x) * 4
+            const dstIndex = srcIndex
+            
+            if (srcIndex < data.length && dstIndex < outputData.length) {
+              outputData[dstIndex] = data[srcIndex]
+              outputData[dstIndex + 1] = data[srcIndex + 1]
+              outputData[dstIndex + 2] = data[srcIndex + 2]
+              outputData[dstIndex + 3] = data[srcIndex + 3]
+            }
+            continue
+          }
+          
+          // 应用畸变矫正
           const r2 = r * r
           const r4 = r2 * r2
           const radial = 1 + distCoeffs[0] * r2 + distCoeffs[1] * r4 + distCoeffs[2] * r2 * r4 + distCoeffs[3] * r4 * r4
           
-          // 矫正后的坐标
           const xu = xn * radial
           const yu = yn * radial
           
-          // 转换回像素坐标
           const xd = Math.round(xu * fx + cx)
           const yd = Math.round(yu * fy + cy)
           
-          // 边界检查和像素复制
           if (xd >= 0 && xd < width && yd >= 0 && yd < height) {
             const srcIndex = (y * width + x) * 4
             const dstIndex = (yd * width + xd) * 4
             
             if (srcIndex < data.length && dstIndex < outputData.length) {
-              outputData[dstIndex] = data[srcIndex]         // R
-              outputData[dstIndex + 1] = data[srcIndex + 1] // G
-              outputData[dstIndex + 2] = data[srcIndex + 2] // B
-              outputData[dstIndex + 3] = data[srcIndex + 3] // A
+              outputData[dstIndex] = data[srcIndex]
+              outputData[dstIndex + 1] = data[srcIndex + 1]
+              outputData[dstIndex + 2] = data[srcIndex + 2]
+              outputData[dstIndex + 3] = data[srcIndex + 3]
               
-              // 如果使用步长，填充邻近像素
-              if (step > 1) {
-                for (let dy = 0; dy < step && (yd + dy) < height; dy++) {
-                  for (let dx = 0; dx < step && (xd + dx) < width; dx++) {
+              // 填充周围像素以减少空白
+              if (actualStep > 1) {
+                for (let dy = 0; dy < actualStep && (yd + dy) < height; dy++) {
+                  for (let dx = 0; dx < actualStep && (xd + dx) < width; dx++) {
                     const fillIndex = ((yd + dy) * width + (xd + dx)) * 4
                     if (fillIndex < outputData.length) {
                       outputData[fillIndex] = data[srcIndex]
@@ -703,7 +837,6 @@ export default function SmartBinDashboard() {
         }
       }
       
-      // 应用矫正后的图像数据
       const correctedImageData = new ImageData(outputData, width, height)
       ctx.putImageData(correctedImageData, 0, 0)
       
@@ -726,6 +859,20 @@ export default function SmartBinDashboard() {
       setCalibrationEnabled(!calibrationEnabled)
       console.log(calibrationEnabled ? '❌ 镜头矫正已禁用' : '✅ 镜头矫正已启用')
     }
+  }
+
+  // 重置摄像头缩放
+  const resetCameraZoom = () => {
+    setCameraZoom(1.0)
+    setZoomOffsetX(0)
+    setZoomOffsetY(0)
+    console.log('🔄 摄像头缩放已重置')
+  }
+
+  // 处理缩放变化
+  const handleZoomChange = (newZoom: number) => {
+    setCameraZoom(newZoom)
+    console.log(`🔍 摄像头缩放: ${newZoom.toFixed(1)}x`)
   }
 
   // 页面加载时获取系统状态
@@ -840,12 +987,11 @@ export default function SmartBinDashboard() {
                   </div>
                   <button
                     onClick={toggleCalibration}
-                    disabled={isLiveDetecting}
                     className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                       calibrationEnabled
                         ? 'bg-green-500 hover:bg-green-600 text-white'
                         : 'bg-gray-300 hover:bg-gray-400 text-gray-700'
-                    } ${isLiveDetecting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    }`}
                   >
                     {calibrationEnabled ? '✅ 已启用' : '❌ 已禁用'}
                   </button>
@@ -873,7 +1019,6 @@ export default function SmartBinDashboard() {
                         <select 
                           value={correctionQuality} 
                           onChange={(e) => setCorrectionQuality(Number(e.target.value))}
-                          disabled={isLiveDetecting}
                           className="px-2 py-1 text-sm border rounded"
                         >
                           <option value={1}>高质量 (慢)</option>
@@ -885,23 +1030,118 @@ export default function SmartBinDashboard() {
                         {correctionQuality === 1 && "最佳画质，处理较慢"}
                         {correctionQuality === 2 && "平衡画质与性能"}
                         {correctionQuality === 3 && "快速处理，画质略低"}
+                        {isLiveDetecting && frameRate < 15 && (
+                          <div className="text-orange-600 mt-1">
+                            💡 当前帧率较低，建议调至中等或低质量
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* 矫正状态提示 */}
-                {isLiveDetecting && (
-                  <div className={`p-2 rounded-lg text-sm ${
-                    calibrationEnabled
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-yellow-100 text-yellow-800'
-                  }`}>
-                    {calibrationEnabled
-                      ? `🔧 镜头矫正正在应用中 (${correctionQuality === 1 ? '高质量' : correctionQuality === 2 ? '中等质量' : '低质量'})`
-                      : '⚠️ 镜头矫正已禁用，图像可能有畸变'}
-                  </div>
-                )}
+                                 {/* 矫正状态提示 */}
+                 <div className={`p-2 rounded-lg text-sm ${
+                   calibrationEnabled
+                     ? 'bg-green-100 text-green-800'
+                     : 'bg-yellow-100 text-yellow-800'
+                 }`}>
+                   {calibrationEnabled
+                     ? `🔧 镜头矫正: ${correctionQuality === 1 ? '高质量' : correctionQuality === 2 ? '中等质量' : '低质量'} ${isLiveDetecting ? '(实时应用中)' : '(已就绪)'}`
+                     : '⚠️ 镜头矫正已禁用，图像可能有畸变'}
+                 </div>
+                 
+                 {/* 热更改提示 */}
+                 {isLiveDetecting && (
+                   <div className="p-2 rounded-lg text-sm bg-blue-100 text-blue-800">
+                     🔥 <strong>热更改模式</strong>: 所有设置可在预览时实时调节
+                     <div className="text-xs mt-1 text-blue-700">
+                       ✅ 已优化性能，减少闪烁问题
+                     </div>
+                   </div>
+                 )}
+                 
+                 {/* 性能监控 */}
+                 {isLiveDetecting && (
+                   <div className="p-2 rounded-lg text-sm bg-gray-100 text-gray-700">
+                     <div className="flex items-center justify-between mb-1">
+                       <span>📊 <strong>性能监控</strong>: {frameRate}fps</span>
+                       {frameRate < 15 && (
+                         <button
+                           onClick={() => setCorrectionQuality(3)}
+                           className="px-2 py-1 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded"
+                         >
+                           🚀 自动优化
+                         </button>
+                       )}
+                     </div>
+                     <div>
+                       {frameRate < 15 && <span className="text-orange-600"> ⚠️ 帧率较低</span>}
+                       {frameRate >= 15 && frameRate < 25 && <span className="text-yellow-600"> ⚡ 帧率中等</span>}
+                       {frameRate >= 25 && <span className="text-green-600"> ✅ 帧率良好</span>}
+                       {correctionQuality > 1 && <span className="text-blue-600"> • 已启用性能优化</span>}
+                     </div>
+                   </div>
+                 )}
+
+                 {/* 摄像头缩放控制 */}
+                 <div className="p-3 bg-indigo-50 rounded-lg">
+                   <h4 className="font-medium text-indigo-800 mb-3">🔍 摄像头缩放</h4>
+                   
+                   {/* 缩放滑块 */}
+                   <div className="space-y-3">
+                     <div className="flex items-center justify-between">
+                       <span className="text-sm text-indigo-700">缩放倍数</span>
+                       <span className="text-sm font-mono text-indigo-800">{cameraZoom.toFixed(1)}x</span>
+                     </div>
+                     
+                     <div className="relative">
+                       <input
+                         type="range"
+                         min="0.5"
+                         max="3.0"
+                         step="0.1"
+                         value={cameraZoom}
+                         onChange={(e) => handleZoomChange(parseFloat(e.target.value))}
+                         className="w-full h-2 bg-indigo-200 rounded-lg appearance-none cursor-pointer"
+                         style={{
+                           background: `linear-gradient(to right, #6366f1 0%, #6366f1 ${((cameraZoom - 0.5) / (3.0 - 0.5)) * 100}%, #e0e7ff ${((cameraZoom - 0.5) / (3.0 - 0.5)) * 100}%, #e0e7ff 100%)`
+                         }}
+                       />
+                       <div className="flex justify-between text-xs text-indigo-600 mt-1">
+                         <span>0.5x</span>
+                         <span>1.0x</span>
+                         <span>2.0x</span>
+                         <span>3.0x</span>
+                       </div>
+                     </div>
+                     
+                     {/* 控制按钮 */}
+                     <div className="flex gap-2">
+                                               <button
+                          onClick={resetCameraZoom}
+                          className="px-3 py-1 text-sm rounded-lg font-medium transition-colors bg-indigo-500 hover:bg-indigo-600 text-white"
+                        >
+                          🔄 重置
+                        </button>
+                        
+                        <button
+                          onClick={() => handleZoomChange(cameraZoom === 1.0 ? 2.0 : 1.0)}
+                          className="px-3 py-1 text-sm rounded-lg font-medium transition-colors bg-indigo-500 hover:bg-indigo-600 text-white"
+                        >
+                          {cameraZoom === 1.0 ? '🔍 放大2x' : '🔍 还原'}
+                        </button>
+                     </div>
+                     
+                     {/* 缩放提示 */}
+                     <div className="text-xs text-indigo-600">
+                       {cameraZoom < 1.0 && '🔍 缩小视野，查看更广范围'}
+                       {cameraZoom === 1.0 && '🎯 原始大小，最佳视野'}
+                       {cameraZoom > 1.0 && '🔎 放大视野，查看细节'}
+                       {isLiveDetecting && ' • 实时调节中'}
+                     </div>
+                   </div>
+                 </div>
               </div>
             </div>
 

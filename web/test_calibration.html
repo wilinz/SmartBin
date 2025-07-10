@@ -72,10 +72,21 @@
             font-family: monospace;
             font-size: 12px;
         }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>📷 镜头矫正测试</h1>
+    <h1>📷 镜头矫正测试 - 热更改模式</h1>
+    <p style="color: #666; margin: 10px 0;">此页面用于测试相机标定参数的效果。<strong>🔥 热更改功能:</strong> 所有设置可在视频播放时实时调节，无需重启摄像头。</p>
+    <p style="color: #28a745; margin: 10px 0; font-size: 14px;">✅ <strong>性能优化:</strong> 已优化视频处理流程，减少闪烁问题，提升流畅度。</p>
     
     <div class="container">
         <div class="controls">
@@ -89,6 +100,13 @@
             <div>
                 <button id="loadCalibration" class="button button-success">加载标定参数</button>
                 <button id="toggleCorrection" class="button button-primary" disabled>启用矫正</button>
+            </div>
+            
+            <div>
+                <label for="zoomSlider">🔍 缩放倍数: <span id="zoomValue">1.0x</span></label>
+                <input type="range" id="zoomSlider" min="0.5" max="3.0" step="0.1" value="1.0">
+                <button id="resetZoom" class="button button-primary">重置缩放</button>
+                <p style="font-size: 12px; color: #666; margin: 5px 0;">💡 可在视频播放时实时调节</p>
             </div>
             
             <div id="status" class="status"></div>
@@ -117,6 +135,9 @@
         let undistortMaps = null;
         let correctionEnabled = false;
         let animationId = null;
+        let cameraZoom = 1.0;
+        let zoomOffsetX = 0;
+        let zoomOffsetY = 0;
         
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
@@ -209,8 +230,83 @@
             const button = document.getElementById('toggleCorrection');
             button.textContent = correctionEnabled ? '禁用矫正' : '启用矫正';
             button.className = correctionEnabled ? 'button button-danger' : 'button button-success';
-            setStatus(correctionEnabled ? '镜头矫正已启用' : '镜头矫正已禁用', 'success');
+            
+            // 实时反馈校准状态
+            if (stream) {
+                if (correctionEnabled) {
+                    setStatus('🔧 镜头矫正已启用 (实时应用中)', 'success');
+                } else {
+                    setStatus('⚠️ 镜头矫正已禁用，图像可能有畸变', 'warning');
+                }
+            } else {
+                setStatus(correctionEnabled ? '镜头矫正已启用' : '镜头矫正已禁用', 'success');
+            }
         });
+        
+        // 缩放控制
+        document.getElementById('zoomSlider').addEventListener('input', (e) => {
+            cameraZoom = parseFloat(e.target.value);
+            const zoomText = cameraZoom.toFixed(1) + 'x';
+            document.getElementById('zoomValue').textContent = zoomText;
+            
+            // 实时反馈缩放状态
+            if (stream) {
+                if (cameraZoom < 1.0) {
+                    setStatus(`🔍 缩放: ${zoomText} (缩小视野)`, 'success');
+                } else if (cameraZoom === 1.0) {
+                    setStatus(`🎯 缩放: ${zoomText} (原始大小)`, 'success');
+                } else {
+                    setStatus(`🔎 缩放: ${zoomText} (放大视野)`, 'success');
+                }
+            }
+        });
+        
+        // 重置缩放
+        document.getElementById('resetZoom').addEventListener('click', () => {
+            cameraZoom = 1.0;
+            zoomOffsetX = 0;
+            zoomOffsetY = 0;
+            document.getElementById('zoomSlider').value = '1.0';
+            document.getElementById('zoomValue').textContent = '1.0x';
+            setStatus('缩放已重置', 'success');
+        });
+        
+        // 应用摄像头缩放（优化版本）
+        function applyCameraZoom(canvas, ctx) {
+            if (cameraZoom === 1.0) return;
+            
+            try {
+                // 使用变换矩阵进行缩放，避免创建临时画布
+                ctx.save();
+                
+                // 计算缩放中心点
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                
+                // 移动到中心点
+                ctx.translate(centerX + zoomOffsetX, centerY + zoomOffsetY);
+                
+                // 应用缩放
+                ctx.scale(cameraZoom, cameraZoom);
+                
+                // 移回原位置
+                ctx.translate(-centerX, -centerY);
+                
+                // 重新绘制视频帧
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // 应用镜头矫正（如果启用）
+                if (correctionEnabled && undistortMaps) {
+                    applyLensCorrection(canvas, ctx);
+                }
+                
+                // 恢复状态
+                ctx.restore();
+                
+            } catch (err) {
+                console.error('应用摄像头缩放失败:', err);
+            }
+        }
         
         // 应用镜头矫正（优化版本）
         function applyLensCorrection(canvas, ctx) {
@@ -293,22 +389,39 @@
             }
         }
         
-        // 处理视频帧
+        // 处理视频帧（优化版本）
+        let lastVideoWidth = 0;
+        let lastVideoHeight = 0;
+        
         function processFrame() {
             if (!stream || !video.videoWidth || !video.videoHeight) {
                 animationId = requestAnimationFrame(processFrame);
                 return;
             }
             
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+            // 只在视频尺寸改变时才重新设置画布尺寸
+            if (video.videoWidth !== lastVideoWidth || video.videoHeight !== lastVideoHeight) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                lastVideoWidth = video.videoWidth;
+                lastVideoHeight = video.videoHeight;
+                console.log('画布尺寸已调整:', canvas.width, 'x', canvas.height);
+            }
             
-            // 绘制原始视频帧
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // 应用镜头矫正
-            if (correctionEnabled && undistortMaps) {
-                applyLensCorrection(canvas, ctx);
+            // 如果有缩放，使用缩放函数进行绘制
+            if (cameraZoom !== 1.0) {
+                applyCameraZoom(canvas, ctx);
+            } else {
+                // 绘制原始视频帧
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // 应用镜头矫正
+                if (correctionEnabled && undistortMaps) {
+                    applyLensCorrection(canvas, ctx);
+                }
             }
             
             animationId = requestAnimationFrame(processFrame);
