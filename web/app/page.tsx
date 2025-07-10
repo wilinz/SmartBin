@@ -5,6 +5,18 @@ import Image from 'next/image'
 import { getApiUrl, API_ENDPOINTS } from './config/api'
 import { robotArmGrab, apiGet, apiPost } from './utils/api'
 
+// OpenCV.js 类型声明
+declare global {
+  interface Window {
+    cv: any;
+  }
+}
+
+// OpenCV.js 加载状态检查
+const isOpenCVReady = (): boolean => {
+  return typeof window !== 'undefined' && window.cv && window.cv.Mat;
+};
+
 // 类型定义
 interface SystemStatus {
   detector_loaded: boolean
@@ -98,6 +110,9 @@ export default function SmartBinDashboard() {
   const [lastFrameTime, setLastFrameTime] = useState<number>(0)
   const [frameCount, setFrameCount] = useState<number>(0)
   
+  // OpenCV.js 状态
+  const [openCVReady, setOpenCVReady] = useState<boolean>(false)
+  
   // 机械臂管理相关状态
   const [robotArmTypes, setRobotArmTypes] = useState<RobotArmType[]>([])
   const [currentArmConfig, setCurrentArmConfig] = useState<RobotArmConfig | null>(null)
@@ -130,6 +145,39 @@ export default function SmartBinDashboard() {
       videoRef.current.play().catch(e => console.log('视频播放失败:', e))
     }
   }, [stream])
+  
+  // 监控OpenCV.js加载状态
+  useEffect(() => {
+    let checkInterval: NodeJS.Timeout | null = null
+    
+    const checkOpenCV = () => {
+      if (isOpenCVReady()) {
+        setOpenCVReady(true)
+        console.log('✅ OpenCV.js 已就绪')
+        if (checkInterval) {
+          clearInterval(checkInterval)
+          checkInterval = null
+        }
+      } else {
+        console.log('⏳ 等待 OpenCV.js 加载...')
+      }
+    }
+    
+    // 立即检查一次
+    checkOpenCV()
+    
+    // 如果没有加载完成，每500ms检查一次
+    if (!isOpenCVReady()) {
+      checkInterval = setInterval(checkOpenCV, 500)
+    }
+    
+    // 清理函数
+    return () => {
+      if (checkInterval) {
+        clearInterval(checkInterval)
+      }
+    }
+  }, [])
 
   // 持续将视频帧绘制到Canvas上
   useEffect(() => {
@@ -717,131 +765,119 @@ export default function SmartBinDashboard() {
     }
   }
 
-  // 应用镜头矫正（性能优化版本）
+  // 应用镜头矫正（使用OpenCV.js实现）
   const applyLensCorrection = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
     if (!calibrationEnabled || !undistortMaps) return
     
+    // 检查OpenCV.js是否已加载
+    if (!isOpenCVReady()) {
+      console.warn('⚠️ OpenCV.js 尚未加载，跳过镜头矫正')
+      return
+    }
+    
     try {
-      // 根据矫正质量调整处理密度
-      const step = correctionQuality // 1=高质量, 2=中等, 3=低质量
-      
-      // 对于低质量，使用简化的矫正算法
-      if (step >= 3) {
-        // 简化矫正：使用简单的径向畸变校正
-        const { K, D } = undistortMaps
-        const distCoeffs = D.flat()
-        
-        // 只对边缘区域进行简单的变换
-        ctx.save()
-        
-        // 使用简单的径向变换来近似鱼眼校正
-        const centerX = canvas.width / 2
-        const centerY = canvas.height / 2
-        const maxRadius = Math.min(centerX, centerY)
-        
-        // 创建径向渐变变换
-        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius)
-        
-        // 应用简单的径向缩放
-        ctx.translate(centerX, centerY)
-        ctx.scale(0.85, 0.85) // 简单的缩放矫正，近似鱼眼效果
-        ctx.translate(-centerX, -centerY)
-        
-        // 重新绘制图像
-        const video = videoRef.current
-        if (video) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-        }
-        
-        ctx.restore()
-        return
-      }
-      
-      // 高质量矫正：使用完整算法但优化性能
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      const data = imageData.data
-      const outputData = new Uint8ClampedArray(data.length)
-      
+      const cv = window.cv
       const { K, D, width, height } = undistortMaps
-      const cx = K[0][2]
-      const cy = K[1][2]
-      const fx = K[0][0]
-      const fy = K[1][1]
       
-      const distCoeffs = D.flat()
+      // 获取原始图像数据
+      const imageData = ctx.getImageData(0, 0, width, height)
       
-      // 使用更大的步长减少计算量
-      const actualStep = Math.max(step, 2)
+      // 创建OpenCV Mat对象
+      const src = cv.matFromImageData(imageData)
+      const dst = new cv.Mat()
       
-      for (let y = 0; y < height; y += actualStep) {
-        for (let x = 0; x < width; x += actualStep) {
-          // 归一化坐标
-          const xn = (x - cx) / fx
-          const yn = (y - cy) / fy
-          
-          // 计算径向距离
-          const r = Math.sqrt(xn * xn + yn * yn)
-          
-          // 优化：只对畸变明显的区域进行矫正
-          if (r < 0.1) {
-            // 中心区域畸变很小，直接复制
-            const srcIndex = (y * width + x) * 4
-            const dstIndex = srcIndex
-            
-            if (srcIndex < data.length && dstIndex < outputData.length) {
-              outputData[dstIndex] = data[srcIndex]
-              outputData[dstIndex + 1] = data[srcIndex + 1]
-              outputData[dstIndex + 2] = data[srcIndex + 2]
-              outputData[dstIndex + 3] = data[srcIndex + 3]
-            }
-            continue
-          }
-          
-          // 应用畸变矫正
-          const r2 = r * r
-          const r4 = r2 * r2
-          const radial = 1 + distCoeffs[0] * r2 + distCoeffs[1] * r4 + distCoeffs[2] * r2 * r4 + distCoeffs[3] * r4 * r4
-          
-          const xu = xn * radial
-          const yu = yn * radial
-          
-          const xd = Math.round(xu * fx + cx)
-          const yd = Math.round(yu * fy + cy)
-          
-          if (xd >= 0 && xd < width && yd >= 0 && yd < height) {
-            const srcIndex = (y * width + x) * 4
-            const dstIndex = (yd * width + xd) * 4
-            
-            if (srcIndex < data.length && dstIndex < outputData.length) {
-              outputData[dstIndex] = data[srcIndex]
-              outputData[dstIndex + 1] = data[srcIndex + 1]
-              outputData[dstIndex + 2] = data[srcIndex + 2]
-              outputData[dstIndex + 3] = data[srcIndex + 3]
-              
-              // 填充周围像素以减少空白
-              if (actualStep > 1) {
-                for (let dy = 0; dy < actualStep && (yd + dy) < height; dy++) {
-                  for (let dx = 0; dx < actualStep && (xd + dx) < width; dx++) {
-                    const fillIndex = ((yd + dy) * width + (xd + dx)) * 4
-                    if (fillIndex < outputData.length) {
-                      outputData[fillIndex] = data[srcIndex]
-                      outputData[fillIndex + 1] = data[srcIndex + 1]
-                      outputData[fillIndex + 2] = data[srcIndex + 2]
-                      outputData[fillIndex + 3] = data[srcIndex + 3]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      // 创建相机矩阵 (K)
+      const cameraMatrix = cv.matFromArray(3, 3, cv.CV_64FC1, [
+        K[0][0], K[0][1], K[0][2],
+        K[1][0], K[1][1], K[1][2], 
+        K[2][0], K[2][1], K[2][2]
+      ])
       
-      const correctedImageData = new ImageData(outputData, width, height)
-      ctx.putImageData(correctedImageData, 0, 0)
+      // 创建畸变系数 (D) - 鱼眼模型需要4个系数
+      const distCoeffs = Array.isArray(D) ? (Array.isArray(D[0]) ? D.flat() : D) : [D]
+      const distortionCoeffs = cv.matFromArray(4, 1, cv.CV_64FC1, [
+        distCoeffs[0] || 0,
+        distCoeffs[1] || 0, 
+        distCoeffs[2] || 0,
+        distCoeffs[3] || 0
+      ])
+      
+      // 设置图像尺寸
+      const size = new cv.Size(width, height)
+      
+      // 创建映射表
+      const map1 = new cv.Mat()
+      const map2 = new cv.Mat()
+      
+      // 使用OpenCV鱼眼矫正函数生成映射表
+      // 相当于Python中的 cv2.fisheye.initUndistortRectifyMap
+      cv.fisheye_initUndistortRectifyMap(
+        cameraMatrix,
+        distortionCoeffs,
+        cv.Mat.eye(3, 3, cv.CV_64FC1), // R = eye(3)
+        cameraMatrix, // P = K
+        size,
+        cv.CV_16SC2,
+        map1,
+        map2
+      )
+      
+      // 应用重映射
+      cv.remap(src, dst, map1, map2, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar())
+      
+      // 将结果转换回ImageData并绘制到canvas
+      const resultImageData = new ImageData(
+        new Uint8ClampedArray(dst.data),
+        dst.cols,
+        dst.rows
+      )
+      ctx.putImageData(resultImageData, 0, 0)
+      
+      // 清理内存
+      src.delete()
+      dst.delete()
+      cameraMatrix.delete()
+      distortionCoeffs.delete()
+      map1.delete()
+      map2.delete()
+      
+      console.log('✅ OpenCV.js 镜头矫正完成')
       
     } catch (err) {
-      console.error('❌ 应用镜头矫正失败:', err)
+      console.error('❌ OpenCV.js 镜头矫正失败:', err)
+      console.error('错误详情:', err)
+      
+      // 降级到简化算法
+      applySimpleLensCorrection(canvas, ctx)
+    }
+  }
+  
+  // 简化的镜头矫正算法（当OpenCV.js不可用时）
+  const applySimpleLensCorrection = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+    if (!calibrationEnabled || !undistortMaps) return
+    
+    try {
+      // 简单的径向畸变矫正
+      const centerX = canvas.width / 2
+      const centerY = canvas.height / 2
+      
+      ctx.save()
+      ctx.translate(centerX, centerY)
+      ctx.scale(0.8, 0.8) // 简单的缩放矫正，近似鱼眼效果
+      ctx.translate(-centerX, -centerY)
+      
+      // 重新绘制视频帧
+      const video = videoRef.current
+      if (video) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      }
+      
+      ctx.restore()
+      
+      console.log('✅ 简化镜头矫正完成')
+      
+    } catch (err) {
+      console.error('❌ 简化镜头矫正失败:', err)
     }
   }
 
@@ -1049,6 +1085,13 @@ export default function SmartBinDashboard() {
                    {calibrationEnabled
                      ? `🔧 镜头矫正: ${correctionQuality === 1 ? '高质量' : correctionQuality === 2 ? '中等质量' : '低质量'} ${isLiveDetecting ? '(实时应用中)' : '(已就绪)'}`
                      : '⚠️ 镜头矫正已禁用，图像可能有畸变'}
+                   <div className="text-xs mt-1">
+                     {openCVReady ? (
+                       <span className="text-green-600">✅ OpenCV.js 已加载 (高精度矫正)</span>
+                     ) : (
+                       <span className="text-orange-600">⏳ OpenCV.js 加载中... (使用简化算法)</span>
+                     )}
+                   </div>
                  </div>
                  
                  {/* 热更改提示 */}

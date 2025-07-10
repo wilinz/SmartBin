@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,6 +28,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${robotoMono.variable} antialiased`}
       >
+        {/* 加载 OpenCV.js */}
+        <Script
+          src="https://docs.opencv.org/4.10.0/opencv.js"
+          strategy="beforeInteractive"
+        />
         {children}
       </body>
     </html>
