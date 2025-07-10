@@ -16,3 +16,4 @@ requests
 lxml
 scikit-learn
 plotly
+pyserial
