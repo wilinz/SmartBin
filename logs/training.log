@@ -62,3 +62,15 @@ Check the documentation of torch.load to learn more about types accepted by defa
 2025-07-02 23:58:00,926 - src.models.trainer - INFO - 应用MPS设备特定优化设置
 2025-07-02 23:58:00,926 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 10, 'batch': 32, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1751471880', 'save_period': 2, 'patience': 20, 'resume': False, 'workers': 0, 'amp': True, 'cache': True, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0, 'verbose': True, 'plots': True, 'save': True, 'cos_lr': True, 'close_mosaic': 0}
 2025-07-03 00:02:59,337 - src.models.trainer - INFO - 训练完成，模型保存在: models/garbage_sorting_1751471880/weights/best.pt
+2025-07-10 17:01:53,943 - src.models.trainer - INFO - 检测到Apple Silicon GPU，启用MPS加速
+2025-07-10 17:01:53,943 - src.models.trainer - INFO - 使用设备: mps
+2025-07-10 17:01:53,982 - src.models.trainer - INFO - 成功加载模型: yolov8n
+2025-07-10 17:01:53,982 - src.models.trainer - INFO - 使用MPS优化的训练参数
+2025-07-10 17:01:53,982 - src.models.trainer - INFO - 应用MPS设备特定优化设置
+2025-07-10 17:01:53,982 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 100, 'batch': 16, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1752138113', 'save_period': 10, 'patience': 50, 'resume': False, 'workers': 0, 'amp': True, 'cache': True, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0}
+2025-07-10 17:07:25,768 - src.models.trainer - INFO - 检测到Apple Silicon GPU，启用MPS加速
+2025-07-10 17:07:25,768 - src.models.trainer - INFO - 使用设备: mps
+2025-07-10 17:07:25,807 - src.models.trainer - INFO - 成功加载模型: yolov8n
+2025-07-10 17:07:25,807 - src.models.trainer - INFO - 使用MPS优化的训练参数
+2025-07-10 17:07:25,807 - src.models.trainer - INFO - 应用MPS设备特定优化设置
+2025-07-10 17:07:25,807 - src.models.trainer - INFO - 开始训练模型，参数: {'data': 'datasets/yolo_dataset/dataset.yaml', 'epochs': 50, 'batch': 32, 'lr0': 0.01, 'optimizer': 'AdamW', 'weight_decay': 0.0005, 'momentum': 0.937, 'warmup_epochs': 3, 'warmup_momentum': 0.8, 'warmup_bias_lr': 0.1, 'device': 'mps', 'project': 'models', 'name': 'garbage_sorting_1752138445', 'save_period': 10, 'patience': 20, 'resume': False, 'workers': 0, 'amp': True, 'cache': True, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.1, 'scale': 0.5, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mosaic': 1.0, 'mixup': 0.0, 'verbose': True, 'plots': True, 'save': True, 'cos_lr': True, 'close_mosaic': 40}

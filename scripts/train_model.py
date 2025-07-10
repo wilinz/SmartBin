@@ -20,7 +20,7 @@ from src.utils.config_loader import config_loader
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(description='训练YOLOv8垃圾分拣模型')
-    parser.add_argument('--data', type=str, default='dataset/dataset.yaml', 
+    parser.add_argument('--data', type=str, default='datasets/yolo_dataset/dataset.yaml', 
                        help='数据集配置文件路径')
     parser.add_argument('--model', type=str, default=None,
                        help='模型名称 (yolov8n, yolov8s, yolov8m, yolov8l, yolov8x)')

@@ -3,6 +3,7 @@
 """
 数据预处理模块
 负责将Pascal VOC XML格式转换为YOLO格式，并进行数据集划分
+支持数据增强以提高模型鲁棒性
 """
 
 import os
@@ -14,12 +15,15 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 import yaml
 from collections import defaultdict, Counter
+import cv2
+import numpy as np
 
 # 添加项目根目录到Python路径
 project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 from src.utils.config_loader import ConfigLoader
+from src.data_processing.data_augmentor import DataAugmentor
 
 
 class DataPreprocessor:
@@ -31,11 +35,13 @@ class DataPreprocessor:
     3. 数据统计分析
     """
     
-    def __init__(self, config_path: str = "config"):
+    def __init__(self, config_path: str = "config", enable_augmentation: bool = True, augmentation_config: Optional[Dict] = None):
         """初始化数据预处理器
         
         Args:
             config_path: 配置目录路径
+            enable_augmentation: 是否启用数据增强
+            augmentation_config: 数据增强配置
         """
         self.config_loader = ConfigLoader(config_path)
         self.model_config = self.config_loader.get_model_config()
@@ -46,6 +52,16 @@ class DataPreprocessor:
         self.train_ratio = 0.7
         self.val_ratio = 0.2
         self.test_ratio = 0.1
+        
+        # 数据增强配置
+        self.enable_augmentation = enable_augmentation
+        if self.enable_augmentation:
+            self.augmentor = DataAugmentor(augmentation_config)
+            print("✅ 数据增强已启用")
+            print(f"📈 每张原图将生成 {self.augmentor.config['augmentation_factor']} 张增强图")
+        else:
+            self.augmentor = None
+            print("⚠️ 数据增强已禁用")
         
         # 统计信息
         self.stats = defaultdict(int)
@@ -160,22 +176,71 @@ class DataPreprocessor:
                         print(f"警告: XML文件中没有有效标注: {xml_file}")
                         continue
                     
+                    # 读取图像
+                    image = cv2.imread(str(img_file))
+                    if image is None:
+                        print(f"警告: 无法读取图像文件: {img_file}")
+                        continue
+                    
                     # 生成唯一的文件名（包含类别信息）
-                    unique_name = f"{class_name}_{xml_file.stem}"
+                    base_name = f"{class_name}_{xml_file.stem}"
                     
-                    # 复制图像文件
-                    dest_img = images_dir / f"{unique_name}.jpg"
-                    shutil.copy2(img_file, dest_img)
-                    
-                    # 创建YOLO格式标注文件
-                    label_file = labels_dir / f"{unique_name}.txt"
-                    with open(label_file, 'w') as f:
-                        for ann in annotations:
-                            f.write(f"{ann['class_id']} {ann['x_center']:.6f} "
-                                   f"{ann['y_center']:.6f} {ann['width']:.6f} "
-                                   f"{ann['height']:.6f}\n")
-                    
-                    converted_count += 1
+                    # 如果启用数据增强，生成增强数据
+                    if self.enable_augmentation and self.augmentor:
+                        try:
+                            # 应用数据增强
+                            augmented_pairs = self.augmentor.augment_image_with_annotations(image, annotations)
+                            
+                            # 保存所有增强后的图像和标注
+                            for idx, (aug_image, aug_annotations) in enumerate(augmented_pairs):
+                                if idx == 0:
+                                    # 原始图像
+                                    unique_name = base_name
+                                else:
+                                    # 增强图像
+                                    unique_name = f"{base_name}_aug_{idx}"
+                                
+                                # 保存图像
+                                dest_img = images_dir / f"{unique_name}.jpg"
+                                cv2.imwrite(str(dest_img), aug_image)
+                                
+                                # 保存标注
+                                label_file = labels_dir / f"{unique_name}.txt"
+                                with open(label_file, 'w') as f:
+                                    for ann in aug_annotations:
+                                        f.write(f"{ann['class_id']} {ann['x_center']:.6f} "
+                                               f"{ann['y_center']:.6f} {ann['width']:.6f} "
+                                               f"{ann['height']:.6f}\n")
+                                
+                                converted_count += 1
+                        
+                        except Exception as e:
+                            print(f"数据增强失败，使用原始数据 {xml_file}: {str(e)}")
+                            # 降级处理：只保存原始图像
+                            dest_img = images_dir / f"{base_name}.jpg"
+                            cv2.imwrite(str(dest_img), image)
+                            
+                            label_file = labels_dir / f"{base_name}.txt"
+                            with open(label_file, 'w') as f:
+                                for ann in annotations:
+                                    f.write(f"{ann['class_id']} {ann['x_center']:.6f} "
+                                           f"{ann['y_center']:.6f} {ann['width']:.6f} "
+                                           f"{ann['height']:.6f}\n")
+                            
+                            converted_count += 1
+                    else:
+                        # 不使用数据增强，直接保存原始图像
+                        dest_img = images_dir / f"{base_name}.jpg"
+                        cv2.imwrite(str(dest_img), image)
+                        
+                        label_file = labels_dir / f"{base_name}.txt"
+                        with open(label_file, 'w') as f:
+                            for ann in annotations:
+                                f.write(f"{ann['class_id']} {ann['x_center']:.6f} "
+                                       f"{ann['y_center']:.6f} {ann['width']:.6f} "
+                                       f"{ann['height']:.6f}\n")
+                        
+                        converted_count += 1
                     
                 except Exception as e:
                     print(f"处理文件时出错 {xml_file}: {str(e)}")
@@ -185,6 +250,14 @@ class DataPreprocessor:
         print(f"\n转换完成!")
         print(f"成功转换: {converted_count} 个文件")
         print(f"错误数量: {error_count} 个文件")
+        
+        if self.enable_augmentation:
+            original_count = len([f for f in os.listdir(images_dir) if not '_aug_' in f])
+            augmented_count = converted_count - original_count
+            print(f"原始图像: {original_count} 张")
+            print(f"增强图像: {augmented_count} 张")
+            print(f"数据增强倍数: {converted_count/original_count:.1f}x" if original_count > 0 else "数据增强倍数: 0x")
+        
         self.stats['converted_files'] = converted_count
         self.stats['error_files'] = error_count
     
