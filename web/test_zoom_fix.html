@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缩放检测框测试</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="range"] {
+            width: 200px;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .canvas-container {
+            position: relative;
+            border: 2px solid #333;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        canvas {
+            background: #87CEEB;
+            display: block;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .detection-info {
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 缩放检测框位置测试</h1>
+        <p>这个测试页面用于验证缩放后检测框是否正确显示在物体上。</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>缩放倍数</label>
+                <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1">
+                <span id="zoomValue">1.0</span>
+            </div>
+            <div class="control-group">
+                <label>X偏移</label>
+                <input type="number" id="offsetX" value="0" min="-200" max="200">
+            </div>
+            <div class="control-group">
+                <label>Y偏移</label>
+                <input type="number" id="offsetY" value="0" min="-200" max="200">
+            </div>
+            <div class="control-group">
+                <label></label>
+                <button onclick="resetZoom()">重置缩放</button>
+            </div>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="testCanvas" width="640" height="480"></canvas>
+        </div>
+        
+        <div class="info">
+            <h3>📊 测试信息</h3>
+            <div id="transformInfo"></div>
+            <div class="detection-info" id="detectionInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟检测结果
+        const mockDetections = [
+            { class: 'banana', confidence: 0.95, bbox: [100, 100, 200, 180] },
+            { class: 'plastic', confidence: 0.87, bbox: [350, 200, 450, 300] },
+            { class: 'beverages', confidence: 0.92, bbox: [50, 300, 150, 400] },
+            { class: 'cardboard', confidence: 0.78, bbox: [400, 50, 500, 120] }
+        ];
+
+        // 获取画布和控件
+        const canvas = document.getElementById('testCanvas');
+        const ctx = canvas.getContext('2d');
+        const zoomSlider = document.getElementById('zoomSlider');
+        const zoomValue = document.getElementById('zoomValue');
+        const offsetXInput = document.getElementById('offsetX');
+        const offsetYInput = document.getElementById('offsetY');
+        const transformInfo = document.getElementById('transformInfo');
+        const detectionInfo = document.getElementById('detectionInfo');
+
+        // 当前缩放参数
+        let cameraZoom = 1.0;
+        let zoomOffsetX = 0;
+        let zoomOffsetY = 0;
+
+        // 坐标变换函数（与前端代码相同）
+        function transformCoordinates(x, y, canvasWidth, canvasHeight) {
+            if (cameraZoom === 1.0) {
+                return { x, y };
+            }
+            
+            // 计算缩放中心点
+            const centerX = canvasWidth / 2;
+            const centerY = canvasHeight / 2;
+            
+            // 应用变换：平移 -> 缩放 -> 反向平移
+            const translatedX = x - centerX;
+            const translatedY = y - centerY;
+            
+            const scaledX = translatedX * cameraZoom;
+            const scaledY = translatedY * cameraZoom;
+            
+            const transformedX = scaledX + centerX + zoomOffsetX;
+            const transformedY = scaledY + centerY + zoomOffsetY;
+            
+            return { x: transformedX, y: transformedY };
+        }
+
+        // 绘制模拟图像
+        function drawMockImage() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制背景渐变
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#87CEEB');
+            gradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 应用缩放变换（模拟视频帧缩放）
+            if (cameraZoom !== 1.0) {
+                ctx.save();
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                
+                ctx.translate(centerX + zoomOffsetX, centerY + zoomOffsetY);
+                ctx.scale(cameraZoom, cameraZoom);
+                ctx.translate(-centerX, -centerY);
+            }
+
+            // 绘制模拟物体
+            mockDetections.forEach((detection, index) => {
+                const [x1, y1, x2, y2] = detection.bbox;
+                const colors = ['#FFD700', '#FF69B4', '#32CD32', '#FF6347'];
+                
+                // 绘制物体
+                ctx.fillStyle = colors[index % colors.length];
+                ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
+                
+                // 绘制物体标签
+                ctx.fillStyle = '#000';
+                ctx.font = '14px Arial';
+                ctx.fillText(detection.class, x1 + 5, y1 + 20);
+            });
+
+            if (cameraZoom !== 1.0) {
+                ctx.restore();
+            }
+        }
+
+        // 绘制检测框
+        function drawDetections() {
+            mockDetections.forEach((detection, index) => {
+                const [x1, y1, x2, y2] = detection.bbox;
+                
+                // 计算变换后的坐标
+                const topLeft = transformCoordinates(x1, y1, canvas.width, canvas.height);
+                const bottomRight = transformCoordinates(x2, y2, canvas.width, canvas.height);
+                
+                const rectX = topLeft.x;
+                const rectY = topLeft.y;
+                const rectW = bottomRight.x - topLeft.x;
+                const rectH = bottomRight.y - topLeft.y;
+                
+                // 绘制检测框
+                ctx.strokeStyle = '#00ff00';
+                ctx.lineWidth = 3;
+                ctx.strokeRect(rectX, rectY, rectW, rectH);
+                
+                // 绘制标签背景
+                const label = `${detection.class} ${(detection.confidence * 100).toFixed(1)}%`;
+                ctx.font = '16px Arial';
+                const textWidth = ctx.measureText(label).width;
+                
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.8)';
+                ctx.fillRect(rectX, Math.max(0, rectY - 25), textWidth + 10, 25);
+                
+                // 绘制标签文字
+                ctx.fillStyle = '#000';
+                ctx.fillText(label, rectX + 5, Math.max(15, rectY - 5));
+            });
+        }
+
+        // 更新画布
+        function updateCanvas() {
+            drawMockImage();
+            drawDetections();
+            updateInfo();
+        }
+
+        // 更新信息显示
+        function updateInfo() {
+            transformInfo.innerHTML = `
+                <strong>变换参数:</strong><br>
+                缩放倍数: ${cameraZoom.toFixed(1)}<br>
+                X偏移: ${zoomOffsetX}px<br>
+                Y偏移: ${zoomOffsetY}px<br>
+                画布中心: (${canvas.width/2}, ${canvas.height/2})
+            `;
+            
+            let detectionText = '<strong>检测框坐标变换:</strong><br>';
+            mockDetections.forEach((detection, index) => {
+                const [x1, y1, x2, y2] = detection.bbox;
+                const topLeft = transformCoordinates(x1, y1, canvas.width, canvas.height);
+                const bottomRight = transformCoordinates(x2, y2, canvas.width, canvas.height);
+                
+                detectionText += `${detection.class}: (${x1},${y1},${x2},${y2}) → (${topLeft.x.toFixed(1)},${topLeft.y.toFixed(1)},${bottomRight.x.toFixed(1)},${bottomRight.y.toFixed(1)})<br>`;
+            });
+            detectionInfo.innerHTML = detectionText;
+        }
+
+        // 重置缩放
+        function resetZoom() {
+            cameraZoom = 1.0;
+            zoomOffsetX = 0;
+            zoomOffsetY = 0;
+            
+            zoomSlider.value = 1.0;
+            zoomValue.textContent = '1.0';
+            offsetXInput.value = 0;
+            offsetYInput.value = 0;
+            
+            updateCanvas();
+        }
+
+        // 事件监听
+        zoomSlider.addEventListener('input', (e) => {
+            cameraZoom = parseFloat(e.target.value);
+            zoomValue.textContent = cameraZoom.toFixed(1);
+            updateCanvas();
+        });
+
+        offsetXInput.addEventListener('input', (e) => {
+            zoomOffsetX = parseInt(e.target.value) || 0;
+            updateCanvas();
+        });
+
+        offsetYInput.addEventListener('input', (e) => {
+            zoomOffsetY = parseInt(e.target.value) || 0;
+            updateCanvas();
+        });
+
+        // 初始化
+        updateCanvas();
+    </script>
+</body>
+</html> 

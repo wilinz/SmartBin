@@ -588,17 +588,42 @@ export default function SmartBinDashboard() {
     }
   }
 
+  // 计算变换后的坐标
+  const transformCoordinates = (x: number, y: number, canvasWidth: number, canvasHeight: number) => {
+    if (cameraZoom === 1.0) {
+      return { x, y }
+    }
+    
+    // 计算缩放中心点
+    const centerX = canvasWidth / 2
+    const centerY = canvasHeight / 2
+    
+    // 应用变换：平移 -> 缩放 -> 反向平移
+    const translatedX = x - centerX
+    const translatedY = y - centerY
+    
+    const scaledX = translatedX * cameraZoom
+    const scaledY = translatedY * cameraZoom
+    
+    const transformedX = scaledX + centerX + zoomOffsetX
+    const transformedY = scaledY + centerY + zoomOffsetY
+    
+    return { x: transformedX, y: transformedY }
+  }
+
   // 在画布上绘制检测框
   const drawDetections = (ctx: CanvasRenderingContext2D, detections: DetectionResult[], canvasWidth: number, canvasHeight: number) => {
     detections.forEach((detection, index) => {
       const [x1, y1, x2, y2] = detection.bbox
-      const originalW = x2 - x1
-      const originalH = y2 - y1
       
-      const rectX = x1
-      const rectY = y1
-      const rectW = originalW
-      const rectH = originalH
+      // 计算变换后的坐标
+      const topLeft = transformCoordinates(x1, y1, canvasWidth, canvasHeight)
+      const bottomRight = transformCoordinates(x2, y2, canvasWidth, canvasHeight)
+      
+      const rectX = topLeft.x
+      const rectY = topLeft.y
+      const rectW = bottomRight.x - topLeft.x
+      const rectH = bottomRight.y - topLeft.y
       
       // 绘制检测框
       ctx.strokeStyle = '#00ff00'
